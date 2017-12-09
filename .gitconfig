@@ -1,0 +1,34 @@
+; vim: ft=gitconfig noet ts=4 sts=4
+[user]
+	name = 71e6fd52
+	email = DAStudio.71e6fd52@gmail.com
+	signingkey = FBA9795E2AEF1A80
+[alias]
+	st = status
+	ci = commit -m
+	last = log -1
+	co = checkout
+	br = branch
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	cf = config --global
+	ps = push --verbose
+	pl = pull --verbose
+	in = merge
+	ind = merge --no-ff dev
+	int = merge --no-ff testing
+	ver = tag -s
+[push]
+	default = simple
+[filter "_gpg"]
+	clean = sed 's/^\tsigningkey = [0-9A-F]*$/\tsigningkey = /'
+[commit]
+	gpgsign = true
+[http]
+	;proxy = http://127.0.0.1:8087
+[https]
+	;proxy = http://127.0.0.1:8087
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
