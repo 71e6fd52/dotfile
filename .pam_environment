@@ -1,0 +1,12 @@
+LANG             DEFAULT=zh_CN.UTF-8
+LC_ALL           DEFAULT=${LANG}
+
+XDG_CONFIG_HOME  DEFAULT=@{HOME}/.config
+XDG_DATA_HOME    DEFAULT=@{HOME}/.local/share
+
+BROWSER          DEFAULT=elinks
+EDITOR           DEFAULT=nvim
+VISUAL           DEFAULT=nvim
+PAGER            DEFAULT=less
+
+PACMAN           DEFAULT=powerpill
