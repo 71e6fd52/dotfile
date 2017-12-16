@@ -130,7 +130,6 @@ upgrade()
   mkdir -p ~/.log/upgrade
   ln -srf $log_file ~/.log/upgrade.log
   pacaur -Syu --needed --noconfirm --noedit --ignore linux-lily --ignore linux-lily-headers 2>&1 | tee $log_file
-  pacaur -Fy | tee --append $log_file
   rg '警告' $log_file
   rg '警告：.+ 已被安装为 .+' $log_file
 }
