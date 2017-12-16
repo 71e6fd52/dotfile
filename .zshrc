@@ -111,6 +111,7 @@ alias mv='mv -v'
 alias cp='cp -v --reflink=auto'
 
 alias vim=nvim
+alias emacs='emacs --insecure'
 
 alias g++utf='g++ test.cpp $CXX_FLAGS -lboost_unit_test_framework -o test && ./test'
 alias dal='cd ~/+program/DAlib/build && ../tool/build cmake && sudo make install | lolcat'
