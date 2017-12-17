@@ -40,7 +40,7 @@ load_if_exist /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highligh
 load_if_exist /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 
-export PATH="$HOME/.local/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
+export PATH="$HOME/.local/bin:/home/datsd/.cargo/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
 
 # emacs
 bindkey '^[f' forward-word
