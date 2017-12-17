@@ -3,7 +3,7 @@
 cd "$HOME"
 
 echo "Updating the yadm repo origin URL"
-yadm remote set-url origin "git@github.com:71e6fd52/dotfiles.git"
+yadm remote set-url origin "git@github.com:71e6fd52/dotfile.git"
 
 echo "Init submodules"
 yadm submodule update --recursive --init
