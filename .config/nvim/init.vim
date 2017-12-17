@@ -2,8 +2,9 @@ call plug#begin()
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --system-boost' }
 Plug 'Valloric/ListToggle'
 "Plug 'scrooloose/syntastic'
-Plug 'neomake/neomake'
-Plug 'dojoteef/neomake-autolint'
+"Plug 'neomake/neomake'
+"Plug 'dojoteef/neomake-autolint'
+Plug 'w0rp/ale'
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' } "Markdown 显示
 Plug 'Lokaltog/vim-easymotion' "快速移动
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
@@ -40,12 +41,16 @@ Plug 'DATechnologyStudio/vim-snippets'
 """""""""""
 "  color  "
 """""""""""
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
 """""""""""""
 "  haskell  "
 """""""""""""
-Plug 'neovimhaskell/haskell-vim'
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'alx741/vim-hindent', { 'for': 'haskell' }
+Plug 'alx741/vim-stylishask', { 'for': 'haskell' }
+Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
+Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
 """"""""""""""
 "  complate  "
 """"""""""""""
@@ -226,6 +231,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
+nmap <F10> <Plug>(ale_fix)
 """""""
 "  c  "
 """""""
@@ -238,6 +244,8 @@ let g:syntastic_c_compiler_options = '-std=c99'
 
 let g:neomake_cpp_enabled_makers = ['clangtidy']
 let g:neomake_cpp_clangtidy_args = ['%:p', '--', '-std=c99']
+
+let g:ale_c_clangtidy_options = "-std=c99"
 """""""""
 "  c++  "
 """""""""
@@ -249,6 +257,8 @@ let g:syntastic_cpp_clang_tidy_args = '-checks="*"'
 
 let g:neomake_cpp_enabled_makers = ['clangtidy']
 let g:neomake_cpp_clangtidy_args = ['%:p', '--', '-std=c++1z']
+
+let g:ale_cpp_clangtidy_options = "-std=c++1z"
 """"""""""
 "  ruby  "
 """"""""""
@@ -336,9 +346,9 @@ nnoremap <Leader>a :Ack!<Space>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               haskell                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""
-"  hindent & stylish-haskell  "
-"""""""""""""""""""""""""""""""
+""""""""""""
+"  indent  "
+""""""""""""
 " Helper function, called below with mappings
 function! HaskellFormat(which) abort
   if a:which ==# 'hindent' || a:which ==# 'both'
@@ -354,12 +364,59 @@ endfunction
 augroup haskellStylish
   au!
   " Just hindent
-  au FileType haskell nnoremap <leader>hi :Hindent<CR>
+  au FileType haskell nnoremap <leader>hi :call HaskellFormat('hindent')<CR>
   " Just stylish-haskell
   au FileType haskell nnoremap <leader>hs :call HaskellFormat('stylish')<CR>
   " First hindent, then stylish-haskell
   au FileType haskell nnoremap <leader>hf :call HaskellFormat('both')<CR>
 augroup END
+""""""""""""""
+"  neco-ghc  "
+""""""""""""""
+let g:necoghc_enable_detailed_browse = 1
+""""""""""""
+"  intero  "
+""""""""""""
+augroup interoMaps
+  au!
+  " Maps for intero. Restrict to Haskell buffers so the bindings don't collide.
+
+  " Background process and window management
+  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
+  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
+
+  " Open intero/GHCi split horizontally
+  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
+  " Open intero/GHCi split vertically
+  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
+  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
+
+  " Reloading (pick one)
+  " Automatically reload on save
+  au BufWritePost *.hs InteroReload
+  " Manually save and reload
+  au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
+
+  " Load individual modules
+  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
+  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
+
+  " Type-related information
+  " Heads up! These next two differ from the rest.
+  au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
+  au FileType haskell map <silent> <leader>T <Plug>InteroType
+  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
+
+  " Navigation
+  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
+
+  " Managing targets
+  " Prompts you to enter targets (no silent):
+  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
+augroup END
+
+" Intero starts automatically. Set this if you'd like to prevent that.
+let g:intero_start_immediately = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 misc                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
