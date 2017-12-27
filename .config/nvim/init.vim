@@ -28,6 +28,7 @@ Plug 'vim-scripts/VisIncr'
 Plug 'mileszs/ack.vim' "act ag
 Plug 'arakashic/chromatica.nvim'
 Plug 'LokiChaos/vim-tintin'
+Plug 'pbrisbin/vim-mkdir'
 """""""""""""
 "  airline  "
 """""""""""""
