@@ -29,6 +29,8 @@ Plug 'mileszs/ack.vim' "act ag
 Plug 'arakashic/chromatica.nvim'
 Plug 'LokiChaos/vim-tintin'
 Plug 'pbrisbin/vim-mkdir'
+Plug 'tmhedberg/matchit'
+Plug 'ecomba/vim-ruby-refactoring'
 """""""""""""
 "  airline  "
 """""""""""""
