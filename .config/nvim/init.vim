@@ -18,7 +18,7 @@ Plug 'airblade/vim-gitgutter' "git diff
 Plug 'Yggdroot/indentLine' "indent display
 Plug 'elzr/vim-json'
 Plug 'fholgado/minibufexpl.vim' "display buffer
-Plug 'lilydjwg/fcitx.vim'
+"Plug 'lilydjwg/fcitx.vim'
 Plug 'gcmt/wildfire.vim'
 Plug 'sjl/gundo.vim' "tree undo
 Plug 'vim-scripts/DrawIt'
