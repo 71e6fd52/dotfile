@@ -41,7 +41,7 @@ load_if_exist /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ "$TERM" =~ ".*-256color$" ]] && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
 
-export PATH="$HOME/.local/bin:/home/datsd/.cargo/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
+export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
 
 # emacs
 bindkey '^[f' forward-word
