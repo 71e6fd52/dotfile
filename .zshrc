@@ -42,6 +42,7 @@ load_if_exist /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
 
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
+export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
 # emacs
 bindkey '^[f' forward-word
