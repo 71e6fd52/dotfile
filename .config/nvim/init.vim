@@ -8,16 +8,19 @@ Plug 'w0rp/ale'
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' } "Markdown 显示
 Plug 'Lokaltog/vim-easymotion' "快速移动
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter' "快速注释
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'kshenoy/vim-signature'
 Plug 'kovisoft/slimv', { 'for': 'lisp' } "lisp
 "Plug 'mzlogin/vim-kramdown-tab', { 'for': 'markdown' } "Kramdown 列表缩进
 "Plug 'myusuf3/numbers.vim' "相对行号
 Plug 'airblade/vim-gitgutter' "git diff
+Plug 'jreybert/vimagit'
 Plug 'Yggdroot/indentLine' "indent display
 Plug 'elzr/vim-json'
-Plug 'fholgado/minibufexpl.vim' "display buffer
+"Plug 'fholgado/minibufexpl.vim' "display buffer
 "Plug 'lilydjwg/fcitx.vim'
 Plug 'gcmt/wildfire.vim'
 Plug 'sjl/gundo.vim' "tree undo
@@ -31,6 +34,8 @@ Plug 'LokiChaos/vim-tintin'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tmhedberg/matchit'
 Plug 'ecomba/vim-ruby-refactoring'
+Plug 'skwp/vim-rspec'
+Plug 'Shougo/unite.vim'
 """""""""""""
 "  airline  "
 """""""""""""
@@ -326,8 +331,7 @@ let g:tagbar_autofocus = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               NERDtree                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <F8> :NERDTreeToggle<CR>
-let NERDTreeAutoDeleteBuffer=1
+nmap <F8> :NERDTreeTabsToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                gundo                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
