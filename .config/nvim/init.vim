@@ -1,6 +1,5 @@
 call plug#begin()
 Plug 'Valloric/ListToggle'
-"Plug 'scrooloose/syntastic'
 "Plug 'neomake/neomake'
 "Plug 'dojoteef/neomake-autolint'
 Plug 'w0rp/ale'
@@ -213,28 +212,12 @@ set selectmode=mouse,key
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 "set report=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                           syntastic[-like]                           "
+"                            syntastic-like                            "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_show_diagnostics_ui = 0
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
 nmap <F10> <Plug>(ale_fix)
 """""""
 "  c  "
 """""""
-let g:syntastic_cpp_include_dirs = ['/usr/local/include', '/usr/lib/clang/4.0.1/include', '/usr/include']
-let g:syntastic_c_checkers = ['cpp_check', 'clang_tidy']
-let g:syntastic_c_auto_refresh_includes = 1
-let g:syntastic_c_check_header = 1
-let g:syntastic_cpp_clang_tidy_args = '-checks="*"'
-let g:syntastic_c_compiler_options = '-std=c99'
-
 let g:neomake_cpp_enabled_makers = ['clangtidy']
 let g:neomake_cpp_clangtidy_args = ['%:p', '--', '-std=c99']
 
@@ -242,12 +225,6 @@ let g:ale_c_clangtidy_options = "-std=c99"
 """""""""
 "  c++  "
 """""""""
-let g:syntastic_cpp_include_dirs = ['/usr/include/c++/7.1.1', '/usr/include/c++/7.1.1/x86_64-pc-linux-gnu', '/usr/include/c++/7.1.1/backward', '/usr/local/include', '/usr/lib/clang/4.0.1/include', '/usr/include']
-let g:syntastic_cpp_checkers = ['clang_tidy']
-let g:syntastic_cpp_auto_refresh_includes = 1
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_clang_tidy_args = '-checks="*"'
-
 let g:neomake_cpp_enabled_makers = ['clangtidy']
 let g:neomake_cpp_clangtidy_args = ['%:p', '--', '-std=c++1z']
 
@@ -255,8 +232,6 @@ let g:ale_cpp_clangtidy_options = "-std=c++1z"
 """"""""""
 "  ruby  "
 """"""""""
-let g:syntastic_ruby_checkers = ['rubylint', 'rubocop']
-
 let g:neomake_ruby_enabled_makers = ['rubocop']
 """""""""""""
 "  haskell  "
