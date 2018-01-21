@@ -214,7 +214,13 @@ set selectmode=mouse,key
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            syntastic-like                            "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <F10> <Plug>(ale_fix)
+nmap <leader>f <Plug>(ale_fix)
+let g:ale_fixers = {
+\   'rubt': ['rubocop'],
+\}
+nmap <leader>gt <Plug>(ale_go_to_definition_in_tab)
+nmap <C-k> <Plug>(ale_previous_wrap)
+nmap <C-j> <Plug>(ale_next_wrap)
 """""""
 "  c  "
 """""""
