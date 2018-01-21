@@ -1,5 +1,4 @@
 call plug#begin()
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --system-boost' }
 Plug 'Valloric/ListToggle'
 "Plug 'scrooloose/syntastic'
 "Plug 'neomake/neomake'
@@ -213,25 +212,6 @@ set selection=exclusive
 set selectmode=mouse,key
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 "set report=0
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                            YouCompleteMe                             "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-nnoremap <leader>gi :YcmCompleter GoToInclude<CR>
-nnoremap <leader>gg :YcmCompleter GoTo<CR>
-nnoremap <leader>igg :YcmCompleter GoToImprecise<CR>
-nnoremap <leader>dec :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>def :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gt :YcmCompleter GetType<CR>
-nnoremap <leader>igt :YcmCompleter GetTypeImprecise<CR>
-nnoremap <leader>gp :YcmCompleter GetParent<CR>
-nnoremap <leader>gd :YcmCompleter GetDoc<CR>
-nnoremap <leader>igd :YcmCompleter GetDocImprecise<CR>
-nnoremap <leader>f :YcmCompleter FixIt<CR>
-"Do not ask when starting vim
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_rust_src_path = '/usr/share/rust/src'
-"let g:ycm_show_diagnostics_ui = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           syntastic[-like]                           "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
