@@ -44,9 +44,8 @@ load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$(ruby -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
 export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
-# emacs
-bindkey '^[f' forward-word
-bindkey '^[b' backward-word
+bindkey '^[l' forward-word
+bindkey '^[h' backward-word
 
 autoload edit-command-line; zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
