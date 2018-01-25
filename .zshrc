@@ -48,6 +48,9 @@ export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 bindkey '^[f' forward-word
 bindkey '^[b' backward-word
 
+autoload edit-command-line; zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
 # alias
 which very_safe_rm >/dev/null 2>&1 && alias rm='very_safe_rm' || alias rm='sleep 5 && rm -vi'
 
