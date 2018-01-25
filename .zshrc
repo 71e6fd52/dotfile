@@ -47,8 +47,9 @@ export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 bindkey '^[l' forward-word
 bindkey '^[h' backward-word
 
-autoload edit-command-line; zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
 
 bindkey "\eq" push-line-or-edit
 
