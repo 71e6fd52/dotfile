@@ -60,7 +60,7 @@ alias su='sudo $SHELL'
 alias sudo='sudo '
 alias sudp='sudo '
 
-alias ls='ls --color=auto'
+alias ls='exa'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 
@@ -70,8 +70,8 @@ alias egrep='egrep --color=auto'
 
 alias mkdir='mkdir -p -v'
 
-alias ls='ls -FQ'
-alias la='ls -A'
+alias ls='ls -F'
+alias la='ls -a'
 alias ll='la -l'
 alias l='ls'
 alias s='ls'
