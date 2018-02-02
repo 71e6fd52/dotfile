@@ -12,6 +12,21 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*' rehash true
 
+if_color()
+{
+  [[ "$TERM" =~ ".*-256color$" || "$TERM" =~ "kitty" ]]
+}
+
+if_256()
+{
+  [[ "$TERM" =~ ".*-256color$" ]]
+}
+
+if_kitty()
+{
+  [[ "$TERM" =~ "kitty" ]]
+}
+
 load_if_exist()
 {
   [[ "$1" ]] && [[ -s "$1" ]] && source "$1"
@@ -33,12 +48,13 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh user rbenv background_jobs vcs dir_writable dir)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status time)
-[[ "$TERM" =~ ".*-256color$" ]] && load_if_exist /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+if_color && load_if_exist /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 
 load_if_exist /usr/share/doc/pkgfile/command-not-found.zsh
 load_if_exist /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 load_if_exist /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-[[ "$TERM" =~ ".*-256color$" ]] && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
+if_256 && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
+if_kitty && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
 
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$(ruby -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
