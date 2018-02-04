@@ -1,24 +1,25 @@
 call plug#begin()
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --system-boost' }
 Plug 'Valloric/ListToggle'
-"Plug 'scrooloose/syntastic'
 "Plug 'neomake/neomake'
 "Plug 'dojoteef/neomake-autolint'
 Plug 'w0rp/ale'
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' } "Markdown 显示
 Plug 'Lokaltog/vim-easymotion' "快速移动
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter' "快速注释
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'kshenoy/vim-signature'
 Plug 'kovisoft/slimv', { 'for': 'lisp' } "lisp
 "Plug 'mzlogin/vim-kramdown-tab', { 'for': 'markdown' } "Kramdown 列表缩进
 "Plug 'myusuf3/numbers.vim' "相对行号
 Plug 'airblade/vim-gitgutter' "git diff
+Plug 'jreybert/vimagit'
 Plug 'Yggdroot/indentLine' "indent display
 Plug 'elzr/vim-json'
-Plug 'fholgado/minibufexpl.vim' "display buffer
-Plug 'lilydjwg/fcitx.vim'
+"Plug 'fholgado/minibufexpl.vim' "display buffer
+"Plug 'lilydjwg/fcitx.vim'
 Plug 'gcmt/wildfire.vim'
 Plug 'sjl/gundo.vim' "tree undo
 Plug 'vim-scripts/DrawIt'
@@ -28,6 +29,11 @@ Plug 'vim-scripts/VisIncr'
 Plug 'mileszs/ack.vim' "act ag
 Plug 'arakashic/chromatica.nvim'
 Plug 'LokiChaos/vim-tintin'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'tmhedberg/matchit'
+Plug 'ecomba/vim-ruby-refactoring'
+Plug 'skwp/vim-rspec'
+Plug 'Shougo/unite.vim'
 """""""""""""
 "  airline  "
 """""""""""""
@@ -51,6 +57,11 @@ Plug 'alx741/vim-hindent', { 'for': 'haskell' }
 Plug 'alx741/vim-stylishask', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
+""""""""""""""""
+"  ECMAScript  "
+""""""""""""""""
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'carlitux/deoplete-ternjs'
 """"""""""""""
 "  complate  "
 """"""""""""""
@@ -201,47 +212,18 @@ set selectmode=mouse,key
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 "set report=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                            YouCompleteMe                             "
+"                            syntastic-like                            "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-nnoremap <leader>gi :YcmCompleter GoToInclude<CR>
-nnoremap <leader>gg :YcmCompleter GoTo<CR>
-nnoremap <leader>igg :YcmCompleter GoToImprecise<CR>
-nnoremap <leader>dec :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>def :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gt :YcmCompleter GetType<CR>
-nnoremap <leader>igt :YcmCompleter GetTypeImprecise<CR>
-nnoremap <leader>gp :YcmCompleter GetParent<CR>
-nnoremap <leader>gd :YcmCompleter GetDoc<CR>
-nnoremap <leader>igd :YcmCompleter GetDocImprecise<CR>
-nnoremap <leader>f :YcmCompleter FixIt<CR>
-"Do not ask when starting vim
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_rust_src_path = '/usr/share/rust/src'
-"let g:ycm_show_diagnostics_ui = 1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                           syntastic[-like]                           "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_show_diagnostics_ui = 0
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-nmap <F10> <Plug>(ale_fix)
+nmap <leader>f <Plug>(ale_fix)
+let g:ale_fixers = {
+\   'ruby': ['rubocop'],
+\}
+nmap <leader>gt <Plug>(ale_go_to_definition_in_tab)
+nmap <C-k> <Plug>(ale_previous_wrap)
+nmap <C-j> <Plug>(ale_next_wrap)
 """""""
 "  c  "
 """""""
-let g:syntastic_cpp_include_dirs = ['/usr/local/include', '/usr/lib/clang/4.0.1/include', '/usr/include']
-let g:syntastic_c_checkers = ['cpp_check', 'clang_tidy']
-let g:syntastic_c_auto_refresh_includes = 1
-let g:syntastic_c_check_header = 1
-let g:syntastic_cpp_clang_tidy_args = '-checks="*"'
-let g:syntastic_c_compiler_options = '-std=c99'
-
 let g:neomake_cpp_enabled_makers = ['clangtidy']
 let g:neomake_cpp_clangtidy_args = ['%:p', '--', '-std=c99']
 
@@ -249,12 +231,6 @@ let g:ale_c_clangtidy_options = "-std=c99"
 """""""""
 "  c++  "
 """""""""
-let g:syntastic_cpp_include_dirs = ['/usr/include/c++/7.1.1', '/usr/include/c++/7.1.1/x86_64-pc-linux-gnu', '/usr/include/c++/7.1.1/backward', '/usr/local/include', '/usr/lib/clang/4.0.1/include', '/usr/include']
-let g:syntastic_cpp_checkers = ['clang_tidy']
-let g:syntastic_cpp_auto_refresh_includes = 1
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_clang_tidy_args = '-checks="*"'
-
 let g:neomake_cpp_enabled_makers = ['clangtidy']
 let g:neomake_cpp_clangtidy_args = ['%:p', '--', '-std=c++1z']
 
@@ -262,8 +238,6 @@ let g:ale_cpp_clangtidy_options = "-std=c++1z"
 """"""""""
 "  ruby  "
 """"""""""
-let g:syntastic_ruby_checkers = ['rubylint', 'rubocop']
-
 let g:neomake_ruby_enabled_makers = ['rubocop']
 """""""""""""
 "  haskell  "
@@ -318,8 +292,7 @@ let g:tagbar_autofocus = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               NERDtree                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <F8> :NERDTreeToggle<CR>
-let NERDTreeAutoDeleteBuffer=1
+nmap <F8> :NERDTreeTabsToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                gundo                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -414,6 +387,57 @@ augroup interoMaps
   " Prompts you to enter targets (no silent):
   au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
 augroup END
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              ECMAScript                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set bin if you have many instalations
+"let g:deoplete#sources#ternjs#tern_bin = '/path/to/tern_bin'
+"let g:deoplete#sources#ternjs#timeout = 1
+
+" Whether to include the types of the completions in the result data. Default: 0
+let g:deoplete#sources#ternjs#types = 1
+
+" Whether to include the distance (in scopes for variables, in prototypes for
+" properties) between the completions and the origin position in the result
+" data. Default: 0
+"let g:deoplete#sources#ternjs#depths = 1
+
+" Whether to include documentation strings (if found) in the result data.
+" Default: 0
+let g:deoplete#sources#ternjs#docs = 1
+
+" When on, only completions that match the current word at the given point will
+" be returned. Turn this off to get all results, so that you can filter on the
+" client side. Default: 1
+"let g:deoplete#sources#ternjs#filter = 0
+
+" Whether to use a case-insensitive compare between the current word and
+" potential completions. Default 0
+"let g:deoplete#sources#ternjs#case_insensitive = 1
+
+" When completing a property and no completions are found, Tern will use some
+" heuristics to try and return some properties anyway. Set this to 0 to
+" turn that off. Default: 1
+let g:deoplete#sources#ternjs#guess = 0
+
+" Determines whether the result set will be sorted. Default: 1
+"let g:deoplete#sources#ternjs#sort = 0
+
+" When disabled, only the text before the given position is considered part of
+" the word. When enabled (the default), the whole variable name that the cursor
+" is on will be included. Default: 1
+let g:deoplete#sources#ternjs#expand_word_forward = 0
+
+" Whether to ignore the properties of Object.prototype unless they have been
+" spelled out by at least two characters. Default: 1
+"let g:deoplete#sources#ternjs#omit_object_prototype = 0
+
+" Whether to include JavaScript keywords when completing something that is not
+" a property. Default: 0
+"let g:deoplete#sources#ternjs#include_keywords = 1
+
+" If completions should be returned when inside a literal. Default: 1
+let g:deoplete#sources#ternjs#in_literal = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 misc                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

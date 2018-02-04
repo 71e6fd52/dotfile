@@ -12,14 +12,29 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*' rehash true
 
+if_color()
+{
+  [[ "$TERM" =~ ".*-256color$" || "$TERM" =~ "kitty" ]]
+}
+
+if_256()
+{
+  [[ "$TERM" =~ ".*-256color$" ]]
+}
+
+if_kitty()
+{
+  [[ "$TERM" =~ "kitty" ]]
+}
+
+if_darwin()
+{
+  [[ "$(uname)" =~ 'Darwin' ]]
+}
+
 load_if_exist()
 {
   [[ "$1" ]] && [[ -s "$1" ]] && source "$1"
-}
-
-is_darwin()
-{
-  [[ "$(uname)" =~ 'Darwin' ]]
 }
 
 export PATH="$HOME/.local/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
@@ -44,16 +59,26 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh user rbenv background_jobs vcs dir_writable dir)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status time)
-[[ "$TERM" =~ ".*-256color$" ]] && load_if_exist $share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+if_color && load_if_exist /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 
 load_if_exist $share/doc/pkgfile/command-not-found.zsh
 load_if_exist $share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 load_if_exist $share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
+if_256 && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
+if_kitty && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
+load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
 
-# emacs
-bindkey '^[f' forward-word
-bindkey '^[b' backward-word
+export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$(ruby -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
+export GEM_HOME=$(ruby -e 'print Gem.user_dir')
+
+bindkey '^[l' forward-word
+bindkey '^[h' backward-word
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
+bindkey "\eq" push-line-or-edit
 
 # alias
 which very_safe_rm >/dev/null 2>&1 && alias rm='very_safe_rm' || alias rm='sleep 5 && rm -vi'
@@ -62,7 +87,6 @@ alias su='sudo $SHELL'
 alias sudo='sudo '
 alias sudp='sudo '
 
-alias ls='ls --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 
@@ -72,8 +96,13 @@ alias egrep='egrep --color=auto'
 
 alias mkdir='mkdir -p -v'
 
+<<<<<<< HEAD
 [[ "$(uname)" =~ "Darwin" ]] && alias ls='ls -F' || alias ls='ls -FQ'
 alias la='ls -A'
+=======
+alias ls='exa -F'
+alias la='ls -a'
+>>>>>>> 8a4f63798329f9e3f173d89ec3ca76e58e48a5b6
 alias ll='la -l'
 alias l='ls'
 alias s='ls'
