@@ -17,7 +17,18 @@ load_if_exist()
   [[ "$1" ]] && [[ -s "$1" ]] && source "$1"
 }
 
+is_darwin()
+{
+  [[ "$(uname)" =~ 'Darwin' ]]
+}
+
+export PATH="$HOME/.local/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
+is_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
+
 eval "$(rbenv init -)"
+
+is_darwin && share='/usr/local/share' || share='/usr/share'
+is_darwin && export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_SHOW_CHANGESET=true
@@ -33,14 +44,12 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh user rbenv background_jobs vcs dir_writable dir)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status time)
-[[ "$TERM" =~ ".*-256color$" ]] && load_if_exist /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+[[ "$TERM" =~ ".*-256color$" ]] && load_if_exist $share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 
-load_if_exist /usr/share/doc/pkgfile/command-not-found.zsh
-load_if_exist /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-load_if_exist /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+load_if_exist $share/doc/pkgfile/command-not-found.zsh
+load_if_exist $share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+load_if_exist $share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
-
-export PATH="$HOME/.local/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
 
 # emacs
 bindkey '^[f' forward-word
@@ -63,7 +72,7 @@ alias egrep='egrep --color=auto'
 
 alias mkdir='mkdir -p -v'
 
-alias ls='ls -FQ'
+[[ "$(uname)" =~ "Darwin" ]] && alias ls='ls -F' || alias ls='ls -FQ'
 alias la='ls -A'
 alias ll='la -l'
 alias l='ls'
