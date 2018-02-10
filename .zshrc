@@ -151,7 +151,9 @@ upgrade()
   local log_file=~/.log/upgrade/$DATE.log
   mkdir -p ~/.log/upgrade
   ln -srf $log_file ~/.log/upgrade.log
-  pacaur -Syu --needed --noconfirm --noedit --ignore linux-lily --ignore linux-lily-headers 2>&1 | tee $log_file
+  (sudo pacman -Sy && sudo powerpill -Suw --noconfirm && sudo pacman -Su --noconfirm --ignore linux-lily --ignore linux-lily-headers) 2>&1 | tee $log_file
+  PACMAN=pacman pacaur -Sua --noconfirm --noedit 2>&1 | tee $log_file
+  pacman -Qtdq | ifne sudo pacman -Rcs - 2>&1 | tee $log_file
   rg '警告' $log_file
   rg '警告：.+ 已被安装为 .+' $log_file
 }
