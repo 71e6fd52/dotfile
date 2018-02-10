@@ -38,12 +38,12 @@ load_if_exist()
 }
 
 export PATH="$HOME/.local/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
-is_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
+if_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
 
 eval "$(rbenv init -)"
 
-is_darwin && share='/usr/local/share' || share='/usr/share'
-is_darwin && export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+if_darwin && share='/usr/local/share' || share='/usr/share'
+if_darwin && export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_SHOW_CHANGESET=true
@@ -96,13 +96,8 @@ alias egrep='egrep --color=auto'
 
 alias mkdir='mkdir -p -v'
 
-<<<<<<< HEAD
-[[ "$(uname)" =~ "Darwin" ]] && alias ls='ls -F' || alias ls='ls -FQ'
-alias la='ls -A'
-=======
 alias ls='exa -F'
 alias la='ls -a'
->>>>>>> 8a4f63798329f9e3f173d89ec3ca76e58e48a5b6
 alias ll='la -l'
 alias l='ls'
 alias s='ls'
