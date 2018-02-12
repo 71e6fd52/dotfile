@@ -34,6 +34,9 @@ Plug 'tmhedberg/matchit'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'skwp/vim-rspec'
 Plug 'Shougo/unite.vim'
+
+Plug 'LucHermitte/lh-vim-lib'
+Plug 'LucHermitte/local_vimrc'
 """""""""""""
 "  airline  "
 """""""""""""
