@@ -205,7 +205,8 @@ wine32()
 
 download()
 {
-  read 'uri?URI: '
+  uri=$1
+  [[ "$uri" ]] || read 'uri?URI: '
   axel -a "$uri" -n 8 $@
 }
 
