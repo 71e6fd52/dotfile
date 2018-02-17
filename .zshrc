@@ -159,10 +159,18 @@ alias :q='exit'
 upgrade()
 {
   local DATE=$(date "+%Y%m%dT%H%MZ" --utc)
-  local log_file=~/.log/upgrade/$DATE.log
+  local old_log_file=~/.log/upgrade/$DATE.log
   mkdir -p ~/.log/upgrade
+
+  sudo pacman -Sy 2>&1 | tee $old_log_file
+
+  local packages=$(pacman -Quq | wc -l)
+  local log_file=~/.log/upgrade/${DATE}_${packages}.log
+  mv $old_log_file $log_file
   ln -srf $log_file ~/.log/upgrade.log
-  (sudo pacman -Sy && sudo powerpill -Suw --noconfirm && sudo pacman -Su --noconfirm --ignore linux-lily --ignore linux-lily-headers) 2>&1 | tee $log_file
+
+  sudo powerpill -Suw --noconfirm
+  sudo pacman -Su --noconfirm --ignore linux-lily --ignore linux-lily-headers 2>&1 | tee $log_file
   PACMAN=pacman pacaur -Sua --noconfirm --noedit 2>&1 | tee $log_file
   pacman -Qtdq | ifne sudo pacman -Rcs - 2>&1 | tee $log_file
   rg '警告' $log_file
