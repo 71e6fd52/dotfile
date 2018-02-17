@@ -446,6 +446,14 @@ let g:deoplete#sources#ternjs#expand_word_forward = 0
 " If completions should be returned when inside a literal. Default: 1
 let g:deoplete#sources#ternjs#in_literal = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                            NERD Commenter                            "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+autocmd FileType ruby let g:NERDCompactSexyComs = 0
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 misc                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline_powerline_fonts = 1
