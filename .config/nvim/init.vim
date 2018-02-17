@@ -34,6 +34,8 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'tmhedberg/matchit'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'skwp/vim-rspec'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite.vim'
 
 Plug 'LucHermitte/lh-vim-lib'
@@ -453,3 +455,5 @@ au BufRead,BufNewFile *  setfiletype txt
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 autocmd Filetype json let g:indentLine_enabled = 0
+let g:AutoPairsFlyMode = 1
+au BufWrite * :Autoformat
