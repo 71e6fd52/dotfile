@@ -27,7 +27,8 @@ Plug 'junegunn/vim-easy-align'
 "Plug 'lyuts/vim-rtags'
 Plug 'vim-scripts/VisIncr'
 Plug 'mileszs/ack.vim' "act ag
-Plug 'arakashic/chromatica.nvim'
+"Plug 'arakashic/chromatica.nvim'
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'LokiChaos/vim-tintin'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tmhedberg/matchit'
