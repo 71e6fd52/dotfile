@@ -215,13 +215,14 @@ set selection=exclusive
 set selectmode=mouse,key
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 "set report=0
+set exrc "local vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            syntastic-like                            "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>f <Plug>(ale_fix)
 let g:ale_fixers = {
-\   'ruby': ['rubocop'],
-\}
+      \   'ruby': ['rubocop'],
+      \}
 nmap <leader>gt <Plug>(ale_go_to_definition_in_tab)
 nmap <C-k> <Plug>(ale_previous_wrap)
 nmap <C-j> <Plug>(ale_next_wrap)
