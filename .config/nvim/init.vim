@@ -464,4 +464,4 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 autocmd Filetype json let g:indentLine_enabled = 0
 let g:AutoPairsFlyMode = 1
-au BufWrite * :Autoformat
+au FileType ruby au BufWrite * :Autoformat
