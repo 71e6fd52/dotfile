@@ -1,0 +1,239 @@
+# vim: ft=config
+#DisableFormat: false
+
+BasedOnStyle: Google
+
+#类的访问修饰关键字(private,public,protected···)缩进
+# private:
+# int a;
+# 1表示不缩进
+#大于1的值表示访问修饰关键字的左侧从int a的左侧列开始往右侧移动的距离
+#AccessModifierOffset: 1
+
+#在未封闭(括号的开始和结束不在同一行)的括号中的代码是否对齐
+# if(a &&
+#    b)
+# [Align, DontAlign, AlwaysBreak]
+#AlignAfterOpenBracket: Align
+
+#多行赋值语句按=号对齐
+#AlignConsecutiveAssignments: false
+
+#多行声明语句对齐
+#AlignConsecutiveDeclarations: false
+
+#多行 #define 的 `\` 对齐方向 [DontAlign, Left, Right]
+#AlignEscapedNewlinesLeft: DontAlign
+
+#对齐多行表达式的运算符
+#AlignOperands: false
+
+#是否把注释右对齐,下面为右对齐的效果
+#void someFunction() {
+#    doWork();     // Does something
+#    doMoreWork(); // Does something else
+#}
+#AlignTrailingComments: false
+
+#即使 BinPackParameters 为 false，也可以将函数声明的所有参数放在下一行。
+#AllowAllParametersOfDeclarationOnNextLine: false
+
+#是否允许短代码块在一行写完
+#如 if (a) { return; }
+#AllowShortBlocksOnASingleLine: true
+
+#是否允许短switch的case 语句在一行写完 [None, InlineOnly, Empty, Inline, All]
+#AllowShortCaseLabelsOnASingleLine: Inline
+
+#是否允许短的函数在一行写完
+#AllowShortFunctionsOnASingleLine: true
+
+#是否允许短的语句在一行写完
+#AllowShortIfStatementsOnASingleLine: true
+
+#是否允许短的循环在一行写完
+#AllowShortLoopsOnASingleLine: true
+
+#分离返回类型和函数名
+# [None, All, TopLevel, AllDefinitions, TopLevelDefinitions]
+#AlwaysBreakAfterReturnType: none
+
+#在多行字符串前换行
+#AlwaysBreakBeforeMultilineStrings: true
+
+#在 template 和 class 中换行
+#AlwaysBreakTemplateDeclarations：true
+
+#函数调用的参数在一行或每个一行（不允许混合）
+#BinPackArguments: false
+
+#函数声明/定义的参数在一行或每个一行（不允许混合）
+#BinPackParameters: false
+
+#BraceWrapping
+
+#BreakAfterJavaFieldAnnotations
+
+#在二元运算符*前*断行 [None, NonAssignment, All]
+#BreakBeforeBinaryOperators: All
+
+#括号的断行模式
+# [Attach, Linux, Mozilla, Stroustrup, Allman, GNU, WebKit, Custom]
+#BreakBeforeBraces: Linux
+
+#多重继承换行
+#BreakBeforeInheritanceComma: true
+
+#在三元运算符*前*断行
+#BreakBeforeTernaryOperators: true
+
+#在构造函数初始化时按逗号断行，并以冒号对齐
+# [BeforeColon, BeforeComma, AfterColon]
+#BreakConstructorInitializers: BeforeColon
+
+#允许打破字符串
+#BreakStringLiterals: true
+
+#最大宽度,如果代码超过这个宽度会按语义折行
+#ColumnLimit: 80
+
+#强制注释正则
+#CommentPragmas: ''
+
+#嵌套 namespace 在同一行
+#CompactNamespaces: false
+
+#构造函数初始化一行或每个一行（不允许混合）
+#ConstructorInitializerAllOnOneLineOrOnePerLine: false
+
+#用于缩进构造函数初始化列表的字符数。
+#ConstructorInitializerIndentWidth: 0
+
+#在续行(\  
+#     下一行)时的缩进长度
+#ContinuationIndentWidth: 4
+
+#c++11 初始化列表不作为函数
+#Cpp11BracedListStyle: true
+
+#为 namespace 增加注释
+#FixNamespaceComments: true
+
+#理解 FOREACH 宏
+#ForEachMacros: ['FOREACH', 'BOOST_FOREACH']
+
+#排序 #include 的分类
+#IncludeCategories:
+  #- Regex:           '^DA'
+    #Priority:        2
+  #- Regex:           '.*'
+    #Priority:        1
+
+#IncludeIsMainRegex
+
+#case语句的位置总是在switch语句后缩进一级
+#IndentCaseLabels: true
+
+#缩进宽度
+#IndentWidth: 2
+
+#在返回类型的下一行的函数名缩进
+#IndentWrappedFunctionNames: true
+
+#JavaScriptQuotes
+
+#JavaScriptWrapImports
+
+#在block从空行开始
+#KeepEmptyLinesAtTheStartOfBlocks: false
+
+#语言 [None, Cpp, Java, JavaScript, ObjC, Proto, TableGen]
+Language: Cpp
+
+#block开始的正则
+#MacroBlockBegin: ''
+
+#block开始的正则
+#MacroBlockEnd: ''
+
+#允许最大连续空行数
+#MaxEmptyLinesToKeep: 3
+
+#命名空间缩进 [None, Inner, All]
+#NamespaceIndentation: None
+
+#block内的缩进
+#ObjCBlockIndentWidth: 4
+
+#是否需要在"@property"后加上空格
+#ObjCSpaceAfterProperty: true
+
+#是否需要在协议名后加上空格
+#ObjCSpaceBeforeProtocolList: true
+
+#PenaltyBreakAssignment
+
+#PenaltyBreakBeforeFirstCallParameter
+
+#PenaltyBreakComment
+
+#PenaltyBreakFirstLessLess
+
+#PenaltyBreakString
+
+#PenaltyExcessCharacter
+
+#PenaltyReturnTypeOnItsOwnLine
+
+#指针的 `*` 的位置 [Left, Right, Middle]
+#PointerAlignment: Right
+
+#允许打破注释
+#ReflowComments: true
+
+#排序 #include
+#SortIncludes: true
+
+#排序 using
+#SortUsingDeclarations: true
+
+#在 c-style 类型转换后加入空格
+#SpaceAfterCStyleCast: false
+
+#在 `template` 转换后加入空格
+#SpaceAfterTemplateKeyword: false
+
+#在 = 号前后加空格
+#SpaceBeforeAssignmentOperators: true
+
+#在括号前加上空格 [Never, ControlStatements, Always]
+#SpaceBeforeParens: ControlStatements
+
+#在空括号中加空格
+#SpaceInEmptyParentheses: false
+
+#单行注释前的空格数
+#SpacesBeforeTrailingComments: 0
+
+#是否在<>中间插入空格
+#SpacesInAngles: false
+
+#在 c-style 类型转换中加入空格
+#SpacesInCStyleCastParentheses: false
+
+#是否在容器字面量(@[@"1",@"2"])中插入空格
+#SpacesInContainerLiterals: true
+
+#是否在括号中插入空格
+#SpacesInParentheses: false
+
+#是否在中括号中插入空格
+#SpacesInSquareBrackets
+
+Standard: Cpp11
+
+#tab 宽度
+#TabWidth: 4
+
+#使用tab进行缩进 [Never, ForIndentation, ForContinuationAndIndentation, Always]
+#UseTab: Never
