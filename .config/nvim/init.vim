@@ -223,7 +223,8 @@ set exrc "local vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>f <Plug>(ale_fix)
 let g:ale_fixers = {
-      \   'ruby': ['rubocop'],
+      \ 'ruby': ['rubocop'],
+      \ 'rust': ['rls', 'rustc'],
       \}
 nmap <leader>gt <Plug>(ale_go_to_definition_in_tab)
 nmap <C-k> <Plug>(ale_previous_wrap)
