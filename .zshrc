@@ -96,7 +96,7 @@ alias egrep='egrep --color=auto'
 
 alias mkdir='mkdir -p -v'
 
-alias ls='exa -F'
+alias ls='exa'
 alias la='ls -a'
 alias ll='la -l'
 alias l='ls'
