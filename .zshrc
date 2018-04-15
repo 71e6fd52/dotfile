@@ -40,7 +40,7 @@ load_if_exist()
 export PATH="$HOME/.local/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
 if_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
 
-which rbenv >/dev/null 2>&1 && eval $(rbenv init -)
+which rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 which thefuck >/dev/null 2>&1 && eval $(thefuck --alias)
 
 if_darwin && share='/usr/local/share' || share='/usr/share'
