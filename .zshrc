@@ -131,7 +131,7 @@ alias check='cppcheck --inconclusive -f --enable=warning,style,performance,porta
 
 alias chinese='export LANG="zh_CN.UTF-8"'
 alias english='export LANG="en_US.UTF-8"'
-alias c='LANG="C"'
+alias c='LC_ALL="C"'
 
 alias g='git'
 alias gci='g add . && g ci'
