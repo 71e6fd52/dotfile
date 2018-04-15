@@ -37,9 +37,6 @@ Plug 'skwp/vim-rspec'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite.vim'
-
-Plug 'LucHermitte/lh-vim-lib'
-Plug 'LucHermitte/local_vimrc'
 """""""""""""
 "  airline  "
 """""""""""""
