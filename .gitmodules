@@ -1,6 +1,3 @@
-[submodule ".emacs.d"]
-	path = .emacs.d
-	url = https://github.com/syl20bnr/spacemacs
 [submodule "opt/zsh-sudo"]
 	path = opt/zsh-sudo
 	url = https://github.com/hcgraf/zsh-sudo.git
