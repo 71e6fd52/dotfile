@@ -82,7 +82,7 @@ bindkey "^X^E" edit-command-line
 bindkey "\eq" push-line-or-edit
 
 # alias
-which very_safe_rm >/dev/null 2>&1 && alias rm='very_safe_rm' || alias rm='sleep 5 && rm -vi'
+which very_safe_rm >/dev/null 2>&1 && alias rm='very_safe_rm' || alias rm='rm -vi'
 
 alias su='sudo $SHELL'
 alias sudo='sudo '
