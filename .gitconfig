@@ -1,7 +1,7 @@
 ; vim: ft=gitconfig noet ts=4 sts=4
 [user]
 	name = 71e6fd52
-	email = DAStudio.71e6fd52@gmail.com
+	email = 71e6fd52@gmail.com
 	signingkey = F93694419FD39342
 [alias]
 	st = status
