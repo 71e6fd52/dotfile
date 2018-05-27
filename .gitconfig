@@ -2,7 +2,7 @@
 [user]
 	name = 71e6fd52
 	email = DAStudio.71e6fd52@gmail.com
-	signingkey = FBA9795E2AEF1A80
+	signingkey = F93694419FD39342
 [alias]
 	st = status
 	ci = commit -m
@@ -19,8 +19,6 @@
 	ver = tag -s
 [push]
 	default = simple
-[filter "_gpg"]
-	clean = sed 's/^\tsigningkey = [0-9A-F]*$/\tsigningkey = /'
 [commit]
 	gpgsign = true
 [http]
