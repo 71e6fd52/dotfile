@@ -11,7 +11,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'kshenoy/vim-signature'
-Plug 'kovisoft/slimv', { 'for': 'lisp' } "lisp
+Plug 'kovisoft/slimv', { 'for': ['lisp', 'scheme'] }
 "Plug 'mzlogin/vim-kramdown-tab', { 'for': 'markdown' } "Kramdown 列表缩进
 "Plug 'myusuf3/numbers.vim' "相对行号
 Plug 'airblade/vim-gitgutter' "git diff
@@ -308,8 +308,10 @@ set undodir=~/.cache/nvim/gundo/
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                slimv                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:slimv_swank_cmd = '! tmux new-window -d -n REPL-SBCL "sbcl --load ~/.vim/plugged/slimv/slime/start-swank.lisp"'
+au FileType lisp let g:slimv_swank_cmd = '! systemctl --user start slimv-lisp'
+au FileType scheme let g:slimv_swank_cmd = '! systemctl --user start slimv-scheme'
 let g:lisp_rainbow=1
+let g:paredit_electric_return=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               wildfire                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
