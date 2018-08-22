@@ -114,16 +114,7 @@ alias .....="../../../.."
 alias .4='../../../..'
 alias .5='../../../../..'
 
-alias fin='find . '
-alias fcc=' -name "*.c"'
-alias fh=' -name "*.h"'
-alias fcpp='-name "*.cpp"'
-alias fhpp='-name "*.hpp"'
-alias fch='-name "*.[ch]"'
-alias fchpp='-name "*.[ch]pp"'
-alias fca='\( -name "*.[ch]pp" -o -name "*.[ch]" \)'
-
-alias fuse='find -name ".fuse_hidden*";find -name ".fuse_hidden*"|xargs rm -f'
+alias fuse='find -name ".fuse_hidden*"; find -name ".fuse_hidden*" | xargs rm -f'
 
 alias sty='fin fca -exec astyle {} \;'
 alias check='cppcheck --inconclusive -f --enable=warning,style,performance,portability,unusedFunction -i ./build .'
