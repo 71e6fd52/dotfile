@@ -165,8 +165,8 @@ upgrade()
   sudo pacman -Su --noconfirm --ignore linux-lily --ignore linux-lily-headers 2>&1 | tee -a $log_file
   PACMAN=pacman yay -Sua --noconfirm --answerclean A --removemake --noeditmenu --nodiffmenu 2>&1 | tee -a $log_file
   pacman -Qtdq | ifne sudo pacman -Rcs - 2>&1 | tee -a $log_file
-  rg '错误' $log_file
   rg '警告' $log_file
+  rg '错误' $log_file
   rg '警告：.+ 已被安装为 .+' $log_file
 }
 
