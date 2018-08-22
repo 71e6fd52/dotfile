@@ -98,7 +98,7 @@ alias mkdir='mkdir -p -v'
 
 alias ls='exa'
 alias la='ls -a'
-alias ll='la -l'
+alias ll='la -lg --time-style long-iso'
 alias l='ls'
 alias s='ls'
 
