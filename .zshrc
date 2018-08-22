@@ -37,7 +37,7 @@ load_if_exist()
   [[ "$1" ]] && [[ -s "$1" ]] && source "$1"
 }
 
-export PATH="$HOME/.local/bin:$(ruby -rubygems -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
+export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$(ruby -e "puts Gem.user_dir")/bin:$(go env GOPATH)/bin:/usr/lib/ccache/bin/:$PATH"
 if_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
 
 which rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
@@ -69,7 +69,6 @@ if_256 && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 if_kitty && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
 
-export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$(ruby -e "puts Gem.user_dir")/bin:/usr/lib/ccache/bin/:${PATH}"
 export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
 bindkey '^[l' forward-word
