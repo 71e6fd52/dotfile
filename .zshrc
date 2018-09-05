@@ -148,6 +148,9 @@ alias :q='exit'
 
 alias yay='yay --nodiffmenu --editmenu --answerclean A --removemake'
 
+alias be='bundle exec'
+alias ber='bundle exec rake'
+
 upgrade()
 {
   local DATE=$(date "+%Y%m%dT%H%MZ" --utc)
