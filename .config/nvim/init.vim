@@ -37,6 +37,7 @@ Plug 'skwp/vim-rspec'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite.vim'
+Plug 'rhysd/vim-crystal'
 """""""""""""
 "  airline  "
 """""""""""""
@@ -220,6 +221,9 @@ set exrc "local vimrc
 "                            syntastic-like                            "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>f <Plug>(ale_fix)
+let g:ale_linters = {
+\   'crystal': ['ameba'],
+\}
 let g:ale_fixers = {
       \ 'ruby': ['rubocop'],
       \ 'rust': ['rls', 'rustc'],
