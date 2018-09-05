@@ -461,6 +461,12 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 autocmd FileType ruby let g:NERDCompactSexyComs = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              autoformat                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let b:formatdef_crystal_crystal='"crystal tool format"'
+let b:formatters_crystal = ['crystal_crystal']
+au FileType ruby,rust,crystal au BufWrite * :Autoformat
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 misc                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline_powerline_fonts = 1
@@ -470,4 +476,3 @@ au BufRead,BufNewFile *  setfiletype txt
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 autocmd Filetype json let g:indentLine_enabled = 0
-au FileType ruby,rust au BufWrite * :Autoformat
