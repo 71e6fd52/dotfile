@@ -112,7 +112,8 @@ let g:indentLine_char = '┆'
 " 80.times { print '"' }
 "let &colorcolumn="73,".join(range(80, 999), ",")
 let &colorcolumn="80"
-let &textwidth=72 "comment
+let &textwidth=0
+au FileType vim let &textwidth=72
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               display                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
