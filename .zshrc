@@ -52,8 +52,22 @@ load_if_exist()
   [[ "$1" ]] && [[ -s "$1" ]] && source "$1"
 }
 
+if_openSUSE && command_not_found_handler () {
+  if [ -x /usr/bin/python3 ] && [ -x /usr/bin/command-not-found ]
+  then
+    /usr/bin/python3 /usr/bin/command-not-found "${(Q)1}" zypp
+  fi
+  exit 1
+}
+
+if if_wsl
+then
+  load_if_exist ~/.grml-zshrc || echo "wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc"
+fi
+
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$(ruby -e "puts Gem.user_dir")/bin:$(go env GOPATH)/bin:/usr/lib/ccache/bin/:$PATH"
 if_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
+typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 which rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 which thefuck >/dev/null 2>&1 && eval $(thefuck --alias)
@@ -89,13 +103,6 @@ load_if_exist $plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 if_256 && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 if_kitty && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
-
-if_openSUSE && command_not_found_handler () {
-  if [ -x /usr/bin/python3 ] && [ -x /usr/bin/command-not-found ]
-  then
-    /usr/bin/python3 /usr/bin/command-not-found "${(Q)1}" zypp
-  fi
-}
 
 export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
