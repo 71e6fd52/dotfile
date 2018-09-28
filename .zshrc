@@ -78,6 +78,13 @@ if_darwin && export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-
 
 if if_wsl
 then
+  # POWERLEVEL9K_MODE='nerdfont-complete'
+  # POWERLEVEL9K_SHOW_CHANGESET=true
+  POWERLEVEL9K_USER_ICON="\uF415"
+  POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500"
+  POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{normal}  "
+  POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user rbenv background_jobs vcs status dir_writable dir)
   POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 else
   POWERLEVEL9K_MODE='nerdfont-complete'
@@ -265,3 +272,20 @@ alias cnpm="npm --registry=https://registry.npm.taobao.org \
   --cache=$HOME/.npm/.cache/cnpm \
   --disturl=https://npm.taobao.org/dist \
   --userconfig=$HOME/.cnpmrc"
+
+if_wsl && [[ ! -d "/run/tmux" ]] && {
+  sudo /usr/local/bin/fix_tmux
+}
+if_wsl && [[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
+  [[ -n "$ATTACH_ONLY" ]] && {
+    tmux a 2>/dev/null || {
+      cd && exec tmux
+    }
+    exit
+  }
+
+  cd
+  tmux new-window -c "$PWD" 2>/dev/null && exec tmux a
+  exec tmux
+}
+true
