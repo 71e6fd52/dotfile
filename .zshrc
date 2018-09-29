@@ -194,6 +194,11 @@ alias yay='yay --nodiffmenu --editmenu --answerclean A --removemake'
 alias be='bundle exec'
 alias ber='bundle exec rake'
 
+if if_wsl
+then
+  alias pass='path=($HOME/bin/fakegpg $path) pass'
+fi
+
 if_ArchLinux && upgrade()
 {
   local DATE=$(date "+%Y%m%dT%H%MZ" --utc)

@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+if File.exists? ARGV.last
+  system('/mnt/c/program\ files\ \(x86\)/gnupg/bin/gpg.exe ' + ARGV[0, ARGV.size - 2].to_a.join(' ') + ' <' + ARGV.last)
+else
+  system('/mnt/c/program\ files\ \(x86\)/gnupg/bin/gpg.exe ' + ARGV.to_a.join(' '))
+end
