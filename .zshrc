@@ -63,6 +63,7 @@ if_openSUSE && command_not_found_handler () {
 if if_wsl
 then
   load_if_exist ~/.grml-zshrc || echo "wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc"
+  umask 022
 fi
 
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$(ruby -e "puts Gem.user_dir")/bin:$(go env GOPATH)/bin:/usr/lib/ccache/bin/:$PATH"
