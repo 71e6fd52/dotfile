@@ -12,7 +12,7 @@ export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 
 if [ -n "$DISPLAY" ]; then
-  export BROWSER='chromium.desktop'
+  export BROWSER='firefox-nightly.desktop'
 else
   export BROWSER='elinks'
 fi
