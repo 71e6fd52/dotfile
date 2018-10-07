@@ -463,8 +463,9 @@ autocmd FileType ruby let g:NERDCompactSexyComs = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              autoformat                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let b:formatdef_crystal_crystal='"crystal tool format"'
-let b:formatters_crystal = ['crystal_crystal']
+let g:formatdef_rbeautify = '"ruby-beautify".(&expandtab ? "-s -c".shiftwidth() : "-t")'
+let g:formatdef_crystal_crystal='"crystal tool format"'
+let g:formatters_crystal = ['crystal_crystal']
 au FileType ruby,rust,crystal au BufWrite * :Autoformat
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 misc                                 "
