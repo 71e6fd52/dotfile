@@ -1,5 +1,25 @@
 #!/bin/bash
 
+if_darwin()
+{
+  [[ "$(uname)" =~ 'Darwin' ]]
+}
+
+if_wsl()
+{
+  [[ "$(uname -r)" =~ 'Microsoft' ]]
+}
+
+if_ArchLinux()
+{
+  [[ $(sed -rn 's|^ID="(.+)"$|\1|p' /etc/os-release) =~ ^arch ]]
+}
+
+if_openSUSE()
+{
+  [[ $(sed -rn 's|^ID="(.+)"$|\1|p' /etc/os-release) =~ ^opensuse ]]
+}
+
 cd "$HOME"
 
 echo "Updating the yadm repo origin URL"
@@ -11,4 +31,13 @@ yadm submodule update --recursive --init
 if command -v nvim >/dev/null 2>&1; then
   echo "Bootstraping NeoVim"
   nvim '+PlugUpdate' '+qall'
+fi
+
+if if_ArchLinux
+then
+  : # TODO
+else
+  git clone https://github.com/bhilburn/powerlevel9k.git ~/opt/zsh-theme-powerlevel9k
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/opt/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/opt/zsh-autosuggestions
 fi

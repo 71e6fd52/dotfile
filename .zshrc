@@ -32,39 +32,82 @@ if_darwin()
   [[ "$(uname)" =~ 'Darwin' ]]
 }
 
+if_wsl()
+{
+  [[ "$(uname -r)" =~ 'Microsoft' ]]
+}
+
+if_ArchLinux()
+{
+  [[ $(sed -rn 's|^ID="(.+)"$|\1|p' /etc/os-release) =~ ^arch ]]
+}
+
+if_openSUSE()
+{
+  [[ $(sed -rn 's|^ID="(.+)"$|\1|p' /etc/os-release) =~ ^opensuse ]]
+}
+
 load_if_exist()
 {
   [[ "$1" ]] && [[ -s "$1" ]] && source "$1"
 }
 
+if_openSUSE && command_not_found_handler () {
+  if [ -x /usr/bin/python3 ] && [ -x /usr/bin/command-not-found ]
+  then
+    /usr/bin/python3 /usr/bin/command-not-found "${(Q)1}" zypp
+  fi
+  exit 1
+}
+
+if if_wsl
+then
+  load_if_exist ~/.grml-zshrc || echo "wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc"
+  umask 022
+fi
+
 export PATH="$HOME/.local/bin:$(yarn global bin):$HOME/.cargo/bin:$(ruby -e "puts Gem.user_dir")/bin:$(go env GOPATH)/bin:/usr/lib/ccache/bin/:$PATH"
 if_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
+typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 which rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 which thefuck >/dev/null 2>&1 && eval $(thefuck --alias)
 
-if_darwin && share='/usr/local/share' || share='/usr/share'
+if_darwin && share='/usr/local/share' || if_ArchLinux && share='/usr/share' || share="$HOME/opt"
+if_ArchLinux && plugins="$share/zsh/plugins" || plugins="$share"
 if_darwin && export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_SHOW_CHANGESET=true
-POWERLEVEL9K_USER_ICON="\uF415"
-POWERLEVEL9K_TIME_FORMAT="%D{\uF017 %H:%M \uF073 %Y.%m.%d}"
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=3
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=black
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=blue
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500"
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{normal} "
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh user rbenv background_jobs vcs dir_writable dir)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status time)
-if_color && load_if_exist /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+if if_wsl
+then
+  # POWERLEVEL9K_MODE='nerdfont-complete'
+  # POWERLEVEL9K_SHOW_CHANGESET=true
+  POWERLEVEL9K_USER_ICON="\uF415"
+  POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500"
+  POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{normal}  "
+  POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user rbenv background_jobs vcs status dir_writable dir)
+  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+else
+  POWERLEVEL9K_MODE='nerdfont-complete'
+  POWERLEVEL9K_SHOW_CHANGESET=true
+  POWERLEVEL9K_USER_ICON="\uF415"
+  POWERLEVEL9K_TIME_FORMAT="%D{\uF017 %H:%M \uF073 %Y.%m.%d}"
+  POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
+  POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=3
+  POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=black
+  POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=blue
+  POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500"
+  POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{normal} "
+  POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+  POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh user rbenv background_jobs vcs dir_writable dir)
+  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status time)
+fi
+if_color && load_if_exist $share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 
-load_if_exist $share/doc/pkgfile/command-not-found.zsh
-load_if_exist $share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-load_if_exist $share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+if_ArchLinux && load_if_exist $share/doc/pkgfile/command-not-found.zsh
+load_if_exist $plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+load_if_exist $plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 if_256 && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 if_kitty && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
@@ -151,7 +194,12 @@ alias yay='yay --nodiffmenu --editmenu --answerclean A --removemake'
 alias be='bundle exec'
 alias ber='bundle exec rake'
 
-upgrade()
+if if_wsl
+then
+  alias pass='path=($HOME/bin/fakegpg $path) pass'
+fi
+
+if_ArchLinux && upgrade()
 {
   local DATE=$(date "+%Y%m%dT%H%MZ" --utc)
   local old_log_file=~/.log/upgrade/$DATE.log
@@ -230,3 +278,20 @@ alias cnpm="npm --registry=https://registry.npm.taobao.org \
   --cache=$HOME/.npm/.cache/cnpm \
   --disturl=https://npm.taobao.org/dist \
   --userconfig=$HOME/.cnpmrc"
+
+if_wsl && [[ ! -d "/run/tmux" ]] && {
+  sudo /usr/local/bin/fix_tmux
+}
+if_wsl && [[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
+  [[ -n "$ATTACH_ONLY" ]] && {
+    tmux a 2>/dev/null || {
+      cd && exec tmux
+    }
+    exit
+  }
+
+  cd
+  tmux new-window -c "$PWD" 2>/dev/null && exec tmux a
+  exec tmux
+}
+true
