@@ -202,6 +202,7 @@ alias ber='bundle exec rake'
 if if_wsl
 then
   alias pass='path=($HOME/bin/fakegpg $path) pass'
+  alias wsldm='yadm --yadm-repo $HOME/.yadm_wsl'
 fi
 
 if_ArchLinux && upgrade()
