@@ -42,3 +42,9 @@ else
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/opt/zsh-syntax-highlighting
   git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/opt/zsh-autosuggestions
 fi
+
+if if_wsl
+then
+  echo "Turn to wsldm"
+  yes | yadm --yadm-repo $HOME/.yadm_wsl clone git@github.com:71e6fd52/wsl-dotfile.git
+fi
