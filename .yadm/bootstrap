@@ -33,6 +33,7 @@ if command -v nvim >/dev/null 2>&1; then
   nvim '+PlugUpdate' '+qall'
 fi
 
+echo "get zsh plugin"
 if if_ArchLinux
 then
   : # TODO
