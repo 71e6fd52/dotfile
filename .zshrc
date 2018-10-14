@@ -117,6 +117,14 @@ if_256 && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 if_kitty && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
 
+if [[ $(ps --no-header -p $PPID -o comm | grep -E '^(yakuake|konsole)$' ) ]]
+then
+  for wid in $(xdotool search --pid $PPID)
+  do
+    xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid
+  done
+fi
+
 export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
 bindkey '^[l' forward-word
