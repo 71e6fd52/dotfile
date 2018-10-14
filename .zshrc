@@ -194,7 +194,7 @@ alias checknet='ping 114.114.114.114 -c 2'
 alias https='http --default-scheme=https'
 alias :q='exit'
 
-alias yay='yay --nodiffmenu --editmenu --answerclean A --removemake'
+alias yay='yay --nodiffmenu --editmenu --answerclean A --removemake --devel'
 
 alias be='bundle exec'
 alias ber='bundle exec rake'
@@ -220,7 +220,7 @@ if_ArchLinux && upgrade()
 
   sudo powerpill -Suw --noconfirm
   sudo pacman -Su --noconfirm --ignore linux-lily --ignore linux-lily-headers 2>&1 | tee -a $log_file
-  PACMAN=pacman yay -Sua --noconfirm --answerclean A --removemake --noeditmenu --nodiffmenu 2>&1 | tee -a $log_file
+  PACMAN=pacman yay -Sua --noconfirm --answerclean A --removemake --noeditmenu --nodiffmenu --devel 2>&1 | tee -a $log_file
   pacman -Qtdq | ifne sudo pacman -Rcs - --noconfirm 2>&1 | tee -a $log_file
   rg '警告' $log_file
   rg '错误' $log_file
