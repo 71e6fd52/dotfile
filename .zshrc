@@ -201,7 +201,6 @@ alias ber='bundle exec rake'
 
 if if_wsl
 then
-  alias pass='path=($HOME/bin/fakegpg $path) pass'
   alias wsldm='yadm --yadm-dir $HOME/.wsldm'
 fi
 
