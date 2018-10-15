@@ -7,7 +7,7 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 
 bindkey -v
-zstyle :compinstall filename '/home/datsd/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
 compinit
 zstyle ':completion:*' rehash true
