@@ -56,11 +56,12 @@ if_openSUSE && command_not_found_handler () {
   exit 1
 }
 
-if if_wsl
+if !if_ArchLinux
 then
   load_if_exist ~/.grml-zshrc || echo "wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc"
-  umask 022
 fi
+
+if_wsl && umask 022
 
 if_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
 which yarn >/dev/null 2>&1 && export PATH="$(yarn global bin):$PATH"
