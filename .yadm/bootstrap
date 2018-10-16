@@ -56,5 +56,5 @@ fi
 if if_wsl
 then
   echo "Turn to wsldm"
-  yes | yadm --yadm-repo $HOME/.yadm_wsl clone git@github.com:71e6fd52/wsl-dotfile.git
+  yes | yadm --yadm-dir $HOME/.wsldm clone git@github.com:71e6fd52/wsl-dotfile.git
 fi
