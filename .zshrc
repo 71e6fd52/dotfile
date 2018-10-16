@@ -301,7 +301,7 @@ then
 fi
 
 if_wsl && [[ ! -d "/run/tmux" ]] && {
-  sudo /usr/local/bin/fix_tmux
+  [[ -s /usr/local/bin/fix_tmux ]] && sudo /usr/local/bin/fix_tmux
 }
 if_wsl && [[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
   [[ -n "$ATTACH_ONLY" ]] && {
