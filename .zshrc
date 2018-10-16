@@ -7,10 +7,6 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 
 bindkey -v
-zstyle :compinstall filename "$HOME/.zshrc"
-autoload -Uz compinit
-compinit
-zstyle ':completion:*' rehash true
 
 if_color()
 {
@@ -113,9 +109,15 @@ if_color && load_if_exist $share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 if_ArchLinux && load_if_exist $share/doc/pkgfile/command-not-found.zsh
 load_if_exist $plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 load_if_exist $plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+load_if_exist $plugins/zsh-completions/zsh-completions.plugin.zsh
 if_256 && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 if_kitty && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
+
+zstyle :compinstall filename "$HOME/.zshrc"
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' rehash true
 
 export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
