@@ -61,7 +61,11 @@ then
   load_if_exist ~/.grml-zshrc || echo "wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc"
 fi
 
-if_wsl && umask 022
+if if_wsl
+then
+  umask 022
+  export GPG_TTY=$(tty)
+fi
 
 if_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
 which yarn >/dev/null 2>&1 && export PATH="$(yarn global bin):$PATH"
