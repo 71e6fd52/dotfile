@@ -201,7 +201,7 @@ alias checknet='ping 114.114.114.114 -c 2'
 alias https='http --default-scheme=https'
 alias :q='exit'
 
-alias yay='yay --nodiffmenu --editmenu --answerclean A --removemake --devel'
+alias yay='yay --nodiffmenu --editmenu --cleanmenu --removemake --devel'
 
 alias be='bundle exec'
 alias ber='bundle exec rake'
