@@ -53,6 +53,9 @@ else
   git clone https://github.com/zsh-users/zsh-completions.git ~/opt/zsh-completions
 fi
 
+echo "clone password"
+git clone git@github.com:71e6fd52/password.git .password-store
+
 if if_wsl
 then
   echo "Turn to wsldm"
