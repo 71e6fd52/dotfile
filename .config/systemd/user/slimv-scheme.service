@@ -1,0 +1,6 @@
+[Unit]
+Description=slimv for scheme
+Conflicts=slimv-lisp.service
+
+[Service]
+ExecStart=/usr/bin/scheme --load /home/datsd/.config/nvim/plugged/slimv/slime/contrib/swank-mit-scheme.scm

@@ -1,0 +1,6 @@
+[Unit]
+Description=slimv for common lisp
+Conflicts=slimv-scheme.service
+
+[Service]
+ExecStart=sbcl --load /home/datsd/.config/nvim/plugged/slimv/slime/start-swank.lisp
