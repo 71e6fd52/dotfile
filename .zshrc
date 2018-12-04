@@ -56,7 +56,7 @@ if_openSUSE && command_not_found_handler () {
   exit 1
 }
 
-if [[$(if_ArchLinux; echo$?) -ne 0 ]]
+if [[ $(if_ArchLinux; echo $?) -ne 0 ]]
 then
   load_if_exist ~/.grml-zshrc || echo "wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc"
 fi
