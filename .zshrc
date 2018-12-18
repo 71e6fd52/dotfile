@@ -212,7 +212,8 @@ then
 fi
 
 if_ArchLinux && upgrade()
-{
+{(
+  set -e
   local DATE=$(date "+%Y%m%dT%H%MZ" --utc)
   local old_log_file=~/.log/upgrade/$DATE.log
   mkdir -p ~/.log/upgrade
@@ -231,7 +232,7 @@ if_ArchLinux && upgrade()
   rg '警告' $log_file
   rg '错误' $log_file
   rg '警告：.+ 已被安装为 .+' $log_file
-}
+)}
 
 dict()
 {
