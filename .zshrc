@@ -56,7 +56,7 @@ if_openSUSE && command_not_found_handler () {
   exit 1
 }
 
-if [[ ! if_ArchLinux ]]
+if [[ $(if_ArchLinux; echo $?) -ne 0 ]]
 then
   load_if_exist ~/.grml-zshrc || echo "wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc"
 fi
@@ -212,7 +212,8 @@ then
 fi
 
 if_ArchLinux && upgrade()
-{
+{(
+  set -e
   local DATE=$(date "+%Y%m%dT%H%MZ" --utc)
   local old_log_file=~/.log/upgrade/$DATE.log
   mkdir -p ~/.log/upgrade
@@ -231,7 +232,7 @@ if_ArchLinux && upgrade()
   rg '警告' $log_file
   rg '错误' $log_file
   rg '警告：.+ 已被安装为 .+' $log_file
-}
+)}
 
 dict()
 {

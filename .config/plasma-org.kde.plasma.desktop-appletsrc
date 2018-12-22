@@ -50,6 +50,10 @@ plugin=org.kde.plasma.appmenu
 [Containments][19][Applets][22][Configuration]
 PreloadWeight=0
 
+[Containments][19][Applets][22][Configuration][ConfigDialog]
+DialogHeight=540
+DialogWidth=720
+
 [Containments][19][Applets][27]
 immutability=1
 plugin=org.kde.plasma.systemtray
@@ -66,7 +70,7 @@ plugin=org.kde.plasma.panelspacer
 PreloadWeight=0
 
 [Containments][19][Applets][39][Configuration][General]
-length=886
+length=990
 
 [Containments][19][Applets][42][Configuration][General]
 length=597
@@ -76,7 +80,7 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][19][Applets][44][Configuration]
-PreloadWeight=10
+PreloadWeight=0
 
 [Containments][19][Applets][45]
 immutability=1
@@ -100,21 +104,39 @@ PreloadWeight=100
 favoritesPortedToKAstats=true
 
 [Containments][19][ConfigDialog]
-DialogHeight=89
-DialogWidth=1368
+DialogHeight=86
+DialogWidth=1366
 
 [Containments][19][Configuration]
 PreloadWeight=0
 
 [Containments][19][General]
-AppletOrder=22;39;45;27;44;57
+AppletOrder=57;22;39;45;27;44
+
+[Containments][2][Applets][21][Configuration]
+PreloadWeight=18
+
+[Containments][2][Applets][24][Configuration]
+PreloadWeight=42
+
+[Containments][2][Applets][3][Configuration]
+PreloadWeight=92
+
+[Containments][2][Applets][4][Configuration]
+PreloadWeight=18
+
+[Containments][2][Applets][6][Configuration]
+PreloadWeight=92
+
+[Containments][2][Configuration]
+PreloadWeight=18
 
 [Containments][20]
 activityId=
 formfactor=3
 immutability=1
 lastScreen=0
-location=5
+location=6
 plugin=org.kde.panel
 wallpaperplugin=org.kde.image
 
@@ -140,16 +162,22 @@ sortingStrategy=1
 immutability=1
 plugin=org.kde.plasma.minimizeall
 
+[Containments][20][Applets][58][Configuration]
+PreloadWeight=0
+
 [Containments][20][Applets][60]
 immutability=1
 plugin=org.kde.plasma.panelspacer
+
+[Containments][20][Applets][60][Configuration]
+PreloadWeight=0
 
 [Containments][20][Applets][60][Configuration][General]
 length=40
 
 [Containments][20][ConfigDialog]
-DialogHeight=1080
-DialogWidth=188
+DialogHeight=768
+DialogWidth=162
 
 [Containments][20][Configuration]
 PreloadWeight=0
@@ -184,7 +212,7 @@ immutability=1
 plugin=org.kde.plasma.devicenotifier
 
 [Containments][28][Applets][32][Configuration]
-PreloadWeight=65
+PreloadWeight=86
 
 [Containments][28][Applets][33]
 immutability=1
@@ -198,7 +226,7 @@ immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][28][Applets][34][Configuration]
-PreloadWeight=65
+PreloadWeight=100
 
 [Containments][28][Applets][34][Configuration][ConfigDialog]
 DialogHeight=660
@@ -219,14 +247,14 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][28][Applets][37][Configuration]
-PreloadWeight=0
+PreloadWeight=62
 
 [Containments][28][Applets][38]
 immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][28][Applets][38][Configuration]
-PreloadWeight=34
+PreloadWeight=84
 
 [Containments][28][Applets][53][Configuration]
 PreloadWeight=42
@@ -241,6 +269,13 @@ PreloadWeight=0
 [Containments][28][Applets][55][Configuration]
 PreloadWeight=42
 
+[Containments][28][Applets][62]
+immutability=1
+plugin=org.kde.plasma.vault
+
+[Containments][28][Applets][62][Configuration]
+PreloadWeight=10
+
 [Containments][28][ConfigDialog]
 DialogHeight=660
 DialogWidth=880
@@ -249,9 +284,9 @@ DialogWidth=880
 PreloadWeight=0
 
 [Containments][28][General]
-extraItems=org.kde.plasma.battery,org.kde.plasma.bluetooth,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.mediacontroller,org.kde.plasma.networkmanagement,org.kde.plasma.notifications,org.kde.plasma.volume
+extraItems=org.kde.plasma.battery,org.kde.plasma.bluetooth,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.mediacontroller,org.kde.plasma.networkmanagement,org.kde.plasma.notifications,org.kde.plasma.volume,org.kde.plasma.vault
 hiddenItems=org.kde.plasma.clipboard,KMix
-knownItems=org.kde.discovernotifier,org.kde.ktp-contactlist,org.kde.plasma.battery,org.kde.plasma.bluetooth,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.mediacontroller,org.kde.plasma.networkmanagement,org.kde.plasma.notifications,org.kde.plasma.printmanager,org.kde.plasma.volume,org.kde.plasma.keyboardindicator
+knownItems=org.kde.discovernotifier,org.kde.ktp-contactlist,org.kde.plasma.battery,org.kde.plasma.bluetooth,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.mediacontroller,org.kde.plasma.networkmanagement,org.kde.plasma.notifications,org.kde.plasma.printmanager,org.kde.plasma.volume,org.kde.plasma.keyboardindicator,org.kde.plasma.vault
 shownItems=org.kde.plasma.keyboardindicator
 
 [Containments][43][Applets][40][Configuration][General]
@@ -267,16 +302,53 @@ plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
 
 [Containments][55][Configuration]
-PreloadWeight=2
+PreloadWeight=0
 
 [Containments][55][General]
 ToolBoxButtonState=left
 ToolBoxButtonX=44
 ToolBoxButtonY=36
 
+[Containments][61]
+activityId=a3cbeda3-19e8-43b5-aa35-a74ed6ad52fc
+formfactor=0
+immutability=1
+lastScreen=0
+location=0
+plugin=org.kde.plasma.folder
+wallpaperplugin=org.kde.image
+
+[Containments][61][Configuration]
+PreloadWeight=0
+
+[Containments][61][General]
+ToolBoxButtonState=left
+ToolBoxButtonY=213
+
+[Containments][7][Applets][10][Configuration]
+PreloadWeight=18
+
+[Containments][7][Applets][11][Configuration]
+PreloadWeight=18
+
+[Containments][7][Applets][12][Configuration]
+PreloadWeight=18
+
+[Containments][7][Applets][13][Configuration]
+PreloadWeight=23
+
+[Containments][7][Applets][23][Configuration]
+PreloadWeight=34
+
+[Containments][7][Applets][9][Configuration]
+PreloadWeight=23
+
+[Containments][7][Configuration]
+PreloadWeight=18
+
 [General]
 immutability=2
 
 [ScreenMapping]
 itemsOnDisabledScreens=
-screenMapping=desktop:/trash.desktop,0,desktop:/Battle for Wesnoth.desktop,0,desktop:/GOG Galaxy.desktop,0,desktop:/Factorio.desktop,0,desktop:/Prison Architect.desktop,0,desktop:/Home.desktop,0,desktop:/Warframe.desktop,0,desktop:/steam.desktop,0
+screenMapping=desktop:/Prison Architect.desktop,0,desktop:/steam.desktop,0,desktop:/Just Learn Morse Code.desktop,0,desktop:/Factorio.desktop,0,desktop:/GOG Galaxy.desktop,0,desktop:/Just Learn Morse Code.lnk,0,desktop:/Home.desktop,0,desktop:/Warframe.desktop,0,desktop:/trash.desktop,0,desktop:/Battle for Wesnoth.desktop,0
