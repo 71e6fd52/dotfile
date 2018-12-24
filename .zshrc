@@ -73,7 +73,7 @@ which cargo >/dev/null 2>&1 && export PATH="$HOME/.cargo/bin:$PATH"
 which ruby >/dev/null 2>&1 && export PATH="$(ruby -e "puts Gem.user_dir")/bin:$PATH"
 which go >/dev/null 2>&1 && export PATH="$(go env GOPATH)/bin:$PATH"
 which ccache >/dev/null 2>&1 && export PATH="$(dirname $(which ccache))/../lib/ccache/bin/:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 which rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
