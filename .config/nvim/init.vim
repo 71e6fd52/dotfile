@@ -220,7 +220,7 @@ set selectmode=mouse,key
 "set report=0
 set exrc "local vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                            syntastic-like                            "
+"                                 ale                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>f <Plug>(ale_fix)
 let g:ale_linters = {
@@ -234,28 +234,8 @@ let g:ale_fixers = {
 nmap <leader>gt <Plug>(ale_go_to_definition_in_tab)
 nmap <C-k> <Plug>(ale_previous_wrap)
 nmap <C-j> <Plug>(ale_next_wrap)
-"""""""
-"  c  "
-"""""""
-let g:neomake_cpp_enabled_makers = ['clangtidy']
-let g:neomake_cpp_clangtidy_args = ['%:p', '--', '-std=c99']
-
 let g:ale_c_clangtidy_options = "-std=c99"
-"""""""""
-"  c++  "
-"""""""""
-let g:neomake_cpp_enabled_makers = ['clangtidy']
-let g:neomake_cpp_clangtidy_args = ['%:p', '--', '-std=c++1z']
-
-let g:ale_cpp_clangtidy_options = "-std=c++1z"
-""""""""""
-"  ruby  "
-""""""""""
-let g:neomake_ruby_enabled_makers = ['rubocop']
-"""""""""""""
-"  haskell  "
-"""""""""""""
-let g:neomake_haskell_enabled_makers = ['hlint']
+let g:ale_cpp_clangtidy_options = "-std=c++17"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               deoplate                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
