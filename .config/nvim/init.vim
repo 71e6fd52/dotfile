@@ -113,6 +113,7 @@ let g:indentLine_char = '┆'
 " 80.times { print '"' }
 "let &colorcolumn="73,".join(range(80, 999), ",")
 let &colorcolumn="80"
+au FileType rust let &colorcolumn=""
 let &textwidth=0
 au FileType vim let &textwidth=72
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
