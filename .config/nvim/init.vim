@@ -83,6 +83,7 @@ Plug 'fishbullet/deoplete-ruby'
 Plug 'fszymanski/deoplete-emoji'
 Plug 'zchee/deoplete-zsh'
 Plug 'zchee/deoplete-clang'
+Plug 'racer-rust/vim-racer'
 
 call plug#end()
 let mapleader=","
