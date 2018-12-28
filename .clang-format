@@ -40,7 +40,7 @@ BasedOnStyle: Google
 
 #是否允许短代码块在一行写完
 #如 if (a) { return; }
-#AllowShortBlocksOnASingleLine: true
+AllowShortBlocksOnASingleLine: true
 
 #是否允许短switch的case 语句在一行写完 [None, InlineOnly, Empty, Inline, All]
 #AllowShortCaseLabelsOnASingleLine: Inline
