@@ -38,6 +38,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite.vim'
 Plug 'rhysd/vim-crystal'
+Plug 'cespare/vim-toml'
 """""""""""""
 "  airline  "
 """""""""""""
