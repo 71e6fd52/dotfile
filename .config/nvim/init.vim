@@ -29,7 +29,6 @@ Plug 'vim-scripts/VisIncr'
 Plug 'mileszs/ack.vim' "act ag
 "Plug 'arakashic/chromatica.nvim'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-Plug 'LokiChaos/vim-tintin'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tmhedberg/matchit'
 Plug 'ecomba/vim-ruby-refactoring'
@@ -38,7 +37,12 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite.vim'
 Plug 'rhysd/vim-crystal'
+""""""""""""""
+"  filetype  "
+""""""""""""""
+Plug 'LokiChaos/vim-tintin'
 Plug 'cespare/vim-toml'
+Plug 'ron-rs/ron.vim'
 """""""""""""
 "  airline  "
 """""""""""""
