@@ -42,7 +42,6 @@ Plug 'rhysd/vim-crystal'
 """"""""""""""
 Plug 'LokiChaos/vim-tintin'
 Plug 'cespare/vim-toml'
-Plug 'ron-rs/ron.vim'
 """""""""""""
 "  airline  "
 """""""""""""
@@ -464,3 +463,4 @@ au BufRead,BufNewFile *  setfiletype txt
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 autocmd Filetype json let g:indentLine_enabled = 0
+au BufRead,BufNewFile *.ron set filetype=rust
