@@ -265,7 +265,7 @@ let g:UltiSnipsJumpForwardTrigger = "<C-x>@sn"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               markdown                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:mkdp_path_to_chrome = "chromium"
+let g:mkdp_path_to_chrome = "firefox-nightly"
 "let g:mkdp_auto_start = 1
 let g:mkdp_auto_close = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
