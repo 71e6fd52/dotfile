@@ -241,6 +241,7 @@ nmap <C-k> <Plug>(ale_previous_wrap)
 nmap <C-j> <Plug>(ale_next_wrap)
 let g:ale_c_clangtidy_options = "-std=c99"
 let g:ale_cpp_clangtidy_options = "-std=c++17"
+let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               deoplate                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
