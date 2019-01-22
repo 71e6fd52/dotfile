@@ -10,21 +10,12 @@
 	co = checkout
 	br = branch
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	cf = config --global
 	ps = push --verbose
 	pl = pull --verbose
-	in = merge
-	ind = merge --no-ff dev
-	int = merge --no-ff testing
-	ver = tag -s
 [push]
 	default = simple
 [commit]
 	gpgsign = true
-[http]
-	;proxy = http://127.0.0.1:8087
-[https]
-	;proxy = http://127.0.0.1:8087
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
