@@ -159,8 +159,6 @@ alias s='ls'
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias sdcv='sdcv -01 -2 ~/.stardict -c'
-
 alias ,,=".."
 alias ,,,="..."
 alias ...="../.."
@@ -171,18 +169,12 @@ alias .5='../../../../..'
 
 alias fuse='find -name ".fuse_hidden*"; find -name ".fuse_hidden*" | xargs rm -f'
 
-alias sty='fin fca -exec astyle {} \;'
-alias check='cppcheck --inconclusive -f --enable=warning,style,performance,portability,unusedFunction -i ./build .'
-
 alias chinese='export LANG="zh_CN.UTF-8"'
 alias english='export LANG="en_US.UTF-8"'
 alias c='LC_ALL="C"'
 
 alias g='git'
-alias gci='g add . && g ci'
-alias gitinfo='g lg ;read;g log|lolcat;read;g st|lolcat;read;ls -la|lolcat'
-
-alias lc='lolcat'
+alias gci='git add . && git commit -m'
 
 alias sl='sl -Feal'
 
@@ -190,11 +182,6 @@ alias mv='mv -v'
 alias cp='cp -v --reflink=auto'
 
 alias vim=nvim
-alias emacs='emacs --insecure'
-
-alias g++utf='g++ test.cpp $CXX_FLAGS -lboost_unit_test_framework -o test && ./test'
-alias dal='cd ~/+program/DAlib/build && ../tool/build cmake && sudo make install | lolcat'
-alias cddal='cd ~/+program/DAlib/include'
 
 alias checknet='ping 114.114.114.114 -c 2'
 
