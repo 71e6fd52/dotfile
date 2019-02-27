@@ -453,13 +453,15 @@ autocmd FileType ruby let g:NERDCompactSexyComs = 0
 let g:formatdef_rbeautify = '"ruby-beautify".(&expandtab ? "-s -c".shiftwidth() : "-t")'
 let g:formatdef_crystal_crystal='"crystal tool format"'
 let g:formatters_crystal = ['crystal_crystal']
-function! AutoFormatGroup()
-  augroup AutoFormat
-    au!
-    au BufWrite * :Autoformat
-  augroup END
+augroup AutoFormat
+  au!
+  au BufWritePre * call AutoFormatType()
+augroup END
+function! AutoFormatType()
+  if index(['ruby', 'rust'], &filetype) != -1
+    :Autoformat
+  endif
 endfunction
-au FileType ruby,rust,crystal call AutoFormatGroup()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 misc                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
