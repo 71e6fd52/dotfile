@@ -60,4 +60,6 @@ if if_wsl
 then
   echo "Turn to wsldm"
   yes | yadm --yadm-dir $HOME/.wsldm clone git@github.com:71e6fd52/wsl-dotfile.git
+else
+  echo "Please follow https://wiki.archlinux.org/index.php/Security to hardening system"
 fi
