@@ -78,6 +78,7 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 which rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 which thefuck >/dev/null 2>&1 && eval $(thefuck --alias)
+which sccache >/dev/null 2>&1 && export RUSTC_WRAPPER=sccache
 
 if_darwin && share='/usr/local/share' || if_ArchLinux && share='/usr/share' || share="$HOME/opt"
 if_ArchLinux && plugins="$share/zsh/plugins" || plugins="$share"
