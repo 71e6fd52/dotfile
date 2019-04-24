@@ -194,6 +194,8 @@ alias yay='yay --nodiffmenu --editmenu --cleanmenu --removemake --devel'
 alias be='bundle exec'
 alias ber='bundle exec rake'
 
+alias with_proxy='http_proxy=http://localhost:8099 https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy '
+
 if if_wsl
 then
   alias wsldm='yadm --yadm-dir $HOME/.wsldm'
