@@ -458,7 +458,7 @@ augroup AutoFormat
   au BufWritePre * call AutoFormatType()
 augroup END
 function! AutoFormatType()
-  if index(['ruby', 'rust'], &filetype) != -1
+  if index(['ruby', 'rust', 'eruby'], &filetype) != -1
     :Autoformat
   endif
 endfunction
