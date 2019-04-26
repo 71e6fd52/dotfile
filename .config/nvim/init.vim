@@ -42,6 +42,7 @@ Plug 'rhysd/vim-crystal'
 """"""""""""""
 Plug 'LokiChaos/vim-tintin'
 Plug 'cespare/vim-toml'
+Plug 'kchmck/vim-coffee-script'
 """""""""""""
 "  airline  "
 """""""""""""
