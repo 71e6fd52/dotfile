@@ -292,10 +292,10 @@ alias cnpm="npm --registry=https://registry.npm.taobao.org \
   --disturl=https://npm.taobao.org/dist \
   --userconfig=$HOME/.cnpmrc"
 
-if [[ $(ps --no-header -p $PPID -o comm | grep -E '^(yakuake|konsole)$' ) ]]
-then
-  blur
-fi
+# if [[ $(ps --no-header -p $PPID -o comm | grep -E '^(yakuake|konsole)$' ) ]]
+# then
+  # blur
+# fi
 
 if_wsl && [[ ! -d "/run/tmux" ]] && {
   [[ -s /usr/local/bin/fix_tmux ]] && sudo /usr/local/bin/fix_tmux
