@@ -74,6 +74,7 @@ which ruby >/dev/null 2>&1 && export PATH="$(ruby -e "puts Gem.user_dir")/bin:$P
 which go >/dev/null 2>&1 && export PATH="$(go env GOPATH)/bin:$PATH"
 which ccache >/dev/null 2>&1 && export PATH="$(dirname $(which ccache))/../lib/ccache/bin/:$PATH"
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+[[ -d "$HOME/.rbenv" ]] && export PATH="$HOME/.rbenv/bin:$PATH"
 typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 which rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
