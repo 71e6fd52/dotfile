@@ -263,7 +263,7 @@ let g:ale_rust_rls_config = {
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
-let g:deoplete#enable_at_startup = 1
+autocmd FileType * if &ft != "python" | let g:deoplete#enable_at_startup = 1 | endif
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
