@@ -20,7 +20,7 @@ Plug 'Yggdroot/indentLine' "indent display
 Plug 'elzr/vim-json'
 "Plug 'fholgado/minibufexpl.vim' "display buffer
 "Plug 'lilydjwg/fcitx.vim'
-Plug 'gcmt/wildfire.vim'
+Plug 'gcmt/wildfire.vim' "快速选择
 Plug 'sjl/gundo.vim' "tree undo
 Plug 'vim-scripts/DrawIt'
 Plug 'junegunn/vim-easy-align'
@@ -33,16 +33,23 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'tmhedberg/matchit'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'skwp/vim-rspec'
-Plug 'jiangmiao/auto-pairs'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite.vim'
-Plug 'rhysd/vim-crystal'
+Plug 'rust-lang/rust.vim'
+""""""""""""""
+"  autopair  "
+""""""""""""""
+" Plug 'jiangmiao/auto-pairs'
+Plug 'rstacruz/vim-closer'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-surround'
 """"""""""""""
 "  filetype  "
 """"""""""""""
 Plug 'LokiChaos/vim-tintin'
 Plug 'cespare/vim-toml'
 Plug 'kchmck/vim-coffee-script'
+Plug 'rhysd/vim-crystal'
 """""""""""""
 "  airline  "
 """""""""""""
@@ -88,7 +95,6 @@ Plug 'fishbullet/deoplete-ruby'
 Plug 'fszymanski/deoplete-emoji'
 Plug 'zchee/deoplete-zsh'
 Plug 'zchee/deoplete-clang'
-Plug 'racer-rust/vim-racer'
 
 call plug#end()
 let mapleader=","
@@ -229,20 +235,29 @@ set exrc "local vimrc
 "                                 ale                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>f <Plug>(ale_fix)
+nmap <leader>h <Plug>(ale_hover)
 let g:ale_linters = {
-\   'crystal': ['ameba'],
-\}
+      \   'crystal': ['ameba'],
+      \   'rust': ['rls', 'rustfmt'],
+      \ }
 let g:ale_fixers = {
-      \ 'ruby': ['rubocop'],
-      \ 'rust': ['rls', 'rustc'],
-      \ 'python': ['autopep8'],
-      \}
+      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \   'ruby': ['rubocop'],
+      \   'rust': ['rustfmt'],
+      \   'python': ['autopep8'],
+      \ }
+let g:ale_completion_enabled = 1
 nmap <leader>gt <Plug>(ale_go_to_definition_in_tab)
 nmap <C-k> <Plug>(ale_previous_wrap)
 nmap <C-j> <Plug>(ale_next_wrap)
 let g:ale_c_clangtidy_options = "-std=c99"
 let g:ale_cpp_clangtidy_options = "-std=c++17"
 let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
+let g:ale_rust_rls_config = {
+      \   'rust': {
+      \     'clippy_preference': 'on'
+      \   }
+      \ }
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               deoplate                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -281,7 +296,6 @@ map <Leader><leader>h <Plug>(easymotion-linebackward)
 map <Leader><Leader>j <Plug>(easymotion-j)
 map <Leader><Leader>k <Plug>(easymotion-k)
 map <Leader><leader>l <Plug>(easymotion-lineforward)
-" 重复上一次操作, 类似repeat插件, 很强大
 map <Leader><leader>. <Plug>(easymotion-repeat)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                tagbar                                "
@@ -474,3 +488,4 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 autocmd Filetype json let g:indentLine_enabled = 0
 au BufRead,BufNewFile *.ron set filetype=rust
+let g:rustfmt_autosave = 1
