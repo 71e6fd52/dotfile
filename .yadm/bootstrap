@@ -34,13 +34,24 @@ yadm submodule update --recursive --init
 if if_ArchLinux
 then
   echo "Install Package"
-  sudo pacman -S --needed moreutils exa bat fd ripgrep axel unarchiver openssh pass neovim python-neovim tmux
+  sudo pacman -S --needed moreutils exa bat fd ripgrep axel unarchiver openssh pass neovim python-neovim tmux \
+    rustup
 fi
 
 if command -v nvim >/dev/null 2>&1; then
   echo "Bootstraping NeoVim"
   nvim '+PlugUpdate' '+qall'
 fi
+
+if command -v rustup >/dev/null 2>&1; then
+  echo "Install rust"
+  rustup default nightly
+  rustup update
+
+  mkdir -p ~/.zfunc
+  rustup completions zsh cargo > ~/.zfunc/_cargo
+fi
+
 
 echo "get zsh plugin"
 if if_ArchLinux
