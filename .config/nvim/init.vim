@@ -329,8 +329,8 @@ vmap <C-SPACE> <Plug>(wildfire-water)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 ack                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
 endif
 nnoremap <Leader>a :Ack!<Space>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
