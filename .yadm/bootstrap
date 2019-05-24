@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 if_darwin()
 {
@@ -34,8 +34,13 @@ yadm submodule update --recursive --init
 if if_ArchLinux
 then
   echo "Install Package"
-  sudo pacman -S --needed moreutils exa bat fd ripgrep axel unarchiver openssh pass neovim python-neovim tmux \
-    rustup
+  readonly packages=(
+    moreutils exa bat fd ripgrep sd axel unarchiver openssh pass
+    neovim python-neovim tmux
+    rustup ruby python
+  )
+  sudo pacman -S --needed $packages
+  sudo pacman -D --asexplicit $packages
 fi
 
 if command -v nvim >/dev/null 2>&1; then
@@ -65,7 +70,7 @@ else
 fi
 
 echo "clone password"
-git clone git@github.com:71e6fd52/password.git .password-store
+git clone git@github.com:71e6fd52/password.git ~/.password-store
 
 if if_wsl
 then
