@@ -123,9 +123,11 @@ let g:indentLine_char = '┆'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 80.times { print '"' }
+
 "let &colorcolumn="73,".join(range(80, 999), ",")
 let &colorcolumn="80"
 au FileType rust let &colorcolumn=""
+au FileType python let &colorcolumn="100"
 let &textwidth=0
 au FileType vim let &textwidth=72
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -240,6 +242,7 @@ nmap <leader>h <Plug>(ale_hover)
 let g:ale_linters = {
       \   'crystal': ['ameba'],
       \   'rust': ['rls', 'rustfmt'],
+      \   'python': ['autopep8', 'pylint'],
       \ }
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
