@@ -1,0 +1,13 @@
+[Unit]
+Description=IPFS daemon
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/ipfs daemon
+Nice=10
+MemoryHigh=512M
+MemoryMax=1G
+MemorySwapMax=2G
+
+[Install]
+WantedBy=multiuser.target
