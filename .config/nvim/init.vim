@@ -317,6 +317,7 @@ nmap <F8> :NERDTreeTabsToggle<CR>
 nmap <F7> :GundoToggle<CR>
 set undofile
 set undodir=~/.cache/nvim/gundo/
+let g:gundo_prefer_python3 = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                slimv                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
