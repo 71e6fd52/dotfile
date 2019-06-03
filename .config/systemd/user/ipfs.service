@@ -5,7 +5,7 @@ After=network-online.target
 [Service]
 ExecStart=/usr/bin/ipfs daemon
 Nice=10
-MemoryHigh=512M
+CPUQuota=50%
 MemoryMax=1G
 MemorySwapMax=2G
 
