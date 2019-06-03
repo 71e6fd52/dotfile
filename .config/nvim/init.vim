@@ -33,7 +33,7 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'tmhedberg/matchit'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'skwp/vim-rspec'
-Plug 'Chiel92/vim-autoformat'
+" Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite.vim'
 Plug 'rust-lang/rust.vim'
 """"""""""""""
@@ -241,6 +241,7 @@ nmap <leader>f <Plug>(ale_fix)
 nmap <leader>h <Plug>(ale_hover)
 let g:ale_linters = {
       \   'crystal': ['ameba'],
+      \   'ruby': ['rubocop', 'solargraph'],
       \   'rust': ['rls', 'rustfmt'],
       \   'python': ['autopep8', 'pylint'],
       \ }
@@ -251,6 +252,7 @@ let g:ale_fixers = {
       \   'python': ['autopep8'],
       \ }
 let g:ale_completion_enabled = 1
+autocmd FileType ruby let g:ale_fix_on_save = 1
 nmap <leader>gt <Plug>(ale_go_to_definition_in_tab)
 nmap <C-k> <Plug>(ale_previous_wrap)
 nmap <C-j> <Plug>(ale_next_wrap)
@@ -267,7 +269,7 @@ let g:ale_rust_rls_config = {
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
-autocmd FileType * if &ft != "python" | let g:deoplete#enable_at_startup = 1 | endif
+autocmd FileType * if index(['ruby', 'python'], &filetype) == -1 | let g:deoplete#enable_at_startup = 1 | endif
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -475,10 +477,10 @@ let g:formatdef_crystal_crystal='"crystal tool format"'
 let g:formatters_crystal = ['crystal_crystal']
 augroup AutoFormat
   au!
-  au BufWritePre * call AutoFormatType()
+  " au BufWritePre * call AutoFormatType()
 augroup END
 function! AutoFormatType()
-  if index(['ruby', 'rust', 'eruby'], &filetype) != -1
+  if index(['rust'], &filetype) != -1
     :Autoformat
   endif
 endfunction
