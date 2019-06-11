@@ -184,6 +184,7 @@ alias mv='mv -v'
 alias cp='cp -v --reflink=auto'
 
 alias vim=nvim
+alias vo,='vim '
 
 alias checknet='ping 114.114.114.114 -c 2'
 
