@@ -126,8 +126,6 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*' rehash true
 
-which ruby >/dev/null 2>&1 && export GEM_HOME=$(ruby -e 'print Gem.user_dir')
-
 bindkey '^[l' forward-word
 bindkey '^[h' backward-word
 
