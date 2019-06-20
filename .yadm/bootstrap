@@ -57,6 +57,10 @@ if command -v rustup >/dev/null 2>&1; then
   rustup completions zsh cargo > ~/.zfunc/_cargo
 fi
 
+if command -v emacs >/dev/null 2>&1; then
+  echo "Clone Emacs config"
+  git clone git@github.com:71e6fd52/emacs.d.git ~/.emacs.d
+fi
 
 echo "get zsh plugin"
 if if_ArchLinux
