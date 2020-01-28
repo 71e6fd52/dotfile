@@ -36,6 +36,7 @@ Plug 'skwp/vim-rspec'
 " Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'nathangrigg/vim-beancount'
 """"""""""""""
 "  autopair  "
 """"""""""""""
@@ -496,3 +497,6 @@ nmap ga <Plug>(EasyAlign)
 autocmd Filetype json let g:indentLine_enabled = 0
 " au BufRead,BufNewFile *.ron set filetype=rust
 let g:rustfmt_autosave = 1
+let b:beancount_root = '~/beancount/main.beancount'
+autocmd FileType beancount inoremap . .<C-O>:AlignCommodity<CR>
+autocmd FileType beancount inoremap <Tab> <c-x><c-o>
