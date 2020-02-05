@@ -68,7 +68,6 @@ fi
 
 if if_wsl
 then
-  umask 022
   export GPG_TTY=$(tty)
 fi
 
