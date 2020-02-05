@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 HISTFILE=~/.histfile
 HISTSIZE=65536
 SAVEHIST=4294967296
@@ -83,33 +90,8 @@ if_darwin && share='/usr/local/share' || if_ArchLinux && share='/usr/share' || s
 if_ArchLinux && plugins="$share/zsh/plugins" || plugins="$share"
 if_darwin && export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
-if if_wsl
-then
-  # POWERLEVEL9K_MODE='nerdfont-complete'
-  POWERLEVEL9K_SHOW_CHANGESET=true
-  POWERLEVEL9K_USER_ICON="\uF415"
-  POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500"
-  POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{normal}  "
-  POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user rbenv background_jobs vcs status dir_writable dir)
-  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-else
-  POWERLEVEL9K_MODE='nerdfont-complete'
-  POWERLEVEL9K_SHOW_CHANGESET=true
-  POWERLEVEL9K_USER_ICON="\uF415"
-  POWERLEVEL9K_TIME_FORMAT="%D{\uF017 %H:%M \uF073 %Y.%m.%d}"
-  POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
-  POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=3
-  POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=black
-  POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=blue
-  POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500"
-  POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{normal} "
-  POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-  POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh user rbenv background_jobs vcs dir_writable dir)
-  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status time)
-fi
-if_color && load_if_exist $share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+if_color && load_if_exist ~/.powerlevel10k/powerlevel10k.zsh-theme
+[[ ! -f ~/.p10k.zsh && if_color ]] || source ~/.p10k.zsh
 
 if_ArchLinux && load_if_exist $share/doc/pkgfile/command-not-found.zsh
 load_if_exist $plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
