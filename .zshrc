@@ -260,6 +260,14 @@ help()
   bash -c "help $@"
 }
 
+new_gitlab_project()
+{
+  name=$1
+  [[ "$name" ]] || name=$(git rev-parse --show-toplevel | xargs basename)
+  echo "git push --set-upstream git@gitlab.com:71e6fd52/$name.git $(git rev-parse --abbrev-ref HEAD)"
+  git push --set-upstream git@gitlab.com:71e6fd52/$name.git $(git rev-parse --abbrev-ref HEAD)
+}
+
 alias fitbit='while ! galileo --bluetooth PyDBUS --database RemoteRESTDatabase --no-https-only --debug | grep "Synchronisation successful" ; do : ; done'
 
 alias cqhttp='systemd-run --user --unit=cqhttp docker run --rm --name cqhttp -p 9000:9000 -p 5700:5700 -e CQHTTP_VERSION=2.1.3 -e CQHTTP_POST_MESSAGE_FORMAT=array -e CQHTTP_POST_URL=http://a.lan:9455 -v /home/datsd/_normal/coolq:/home/user/coolq richardchien/cqhttp'
