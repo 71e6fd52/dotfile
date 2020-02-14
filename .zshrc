@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 HISTFILE=~/.histfile
 HISTSIZE=65536
 SAVEHIST=4294967296
@@ -53,6 +46,19 @@ load_if_exist()
   [[ "$1" ]] && [[ -s "$1" ]] && source "$1"
 }
 
+if if_wsl; then
+  umask 022
+  export GPG_TTY=$(tty)
+fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+
 if_openSUSE && command_not_found_handler () {
   if [ -x /usr/bin/python3 ] && [ -x /usr/bin/command-not-found ]
   then
@@ -64,11 +70,6 @@ if_openSUSE && command_not_found_handler () {
 if [[ $(if_ArchLinux; echo $?) -ne 0 ]]
 then
   load_if_exist ~/.grml-zshrc || echo "wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc"
-fi
-
-if if_wsl
-then
-  export GPG_TTY=$(tty)
 fi
 
 if_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
