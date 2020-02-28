@@ -35,12 +35,21 @@ if if_ArchLinux
 then
   echo "Install Package"
   readonly packages=(
-    moreutils exa bat fd ripgrep sd axel unarchiver openssh pass
-    neovim python-neovim tmux
+    moreutils exa bat fd ripgrep sd axel unarchiver
+    neovim python-pynvim emacs
     rustup ruby python
+    pkgfile openssh pass tmux
   )
-  sudo pacman -S --needed $packages
-  sudo pacman -D --asexplicit $packages
+  sudo pacman -S --noconfirm --needed $packages
+  sudo pacman -D --noconfirm --asexplicit $packages
+  if command pacman -Qq xorg-server 2>/dev/null ; then
+    readonly xorg_packages=(
+      emacs
+      firefox-nightly-zh-cn
+    )
+  sudo pacman -S --noconfirm --needed $xorg_packages
+  sudo pacman -D --noconfirm --asexplicit $xorg_packages
+  fi
 fi
 
 if command -v nvim >/dev/null 2>&1; then
@@ -52,6 +61,7 @@ if command -v rustup >/dev/null 2>&1; then
   echo "Install rust"
   rustup default nightly
   rustup update
+  rustup component add clippy rls rust-analysis
 
   mkdir -p ~/.zfunc
   rustup completions zsh cargo > ~/.zfunc/_cargo
@@ -65,9 +75,8 @@ fi
 echo "get zsh plugin"
 if if_ArchLinux
 then
-  sudo pacman -S --needed zsh-theme-powerlevel9k zsh-syntax-highlighting zsh-autosuggestions zsh-completions
+  sudo pacman -S --noconfirm --needed zsh-syntax-highlighting zsh-autosuggestions zsh-completions
 else
-  git clone https://github.com/bhilburn/powerlevel9k.git ~/opt/zsh-theme-powerlevel9k
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/opt/zsh-syntax-highlighting
   git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/opt/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-completions.git ~/opt/zsh-completions

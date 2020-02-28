@@ -4,6 +4,6 @@
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule "/home/x71e6fd52/.powerlevel10k"]
-	path = /home/x71e6fd52/.powerlevel10k
+[submodule ".powerlevel10k"]
+	path = .powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
