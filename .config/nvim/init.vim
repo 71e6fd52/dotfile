@@ -71,10 +71,9 @@ Plug 'tomasr/molokai'
 "  haskell  "
 """""""""""""
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'alx741/vim-hindent', { 'for': 'haskell' }
-Plug 'alx741/vim-stylishask', { 'for': 'haskell' }
-Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
-Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
+" Plug 'alx741/vim-hindent', { 'for': 'haskell' }
+" Plug 'alx741/vim-stylishask', { 'for': 'haskell' }
+" Plug 'meck/vim-brittany', { 'for': 'haskell' }
 """"""""""""""""
 "  ECMAScript  "
 """"""""""""""""
@@ -251,9 +250,9 @@ let g:ale_fixers = {
       \   'ruby': ['rubocop'],
       \   'rust': ['rustfmt'],
       \   'python': ['autopep8'],
+      \   'haskell': ['brittany', 'hlint'],
       \ }
-let g:ale_completion_enabled = 1
-autocmd FileType ruby let g:ale_fix_on_save = 1
+autocmd FileType ruby,haskell let g:ale_fix_on_save = 1
 nmap <leader>gt <Plug>(ale_go_to_definition_in_tab)
 nmap <C-k> <Plug>(ale_previous_wrap)
 nmap <C-j> <Plug>(ale_next_wrap)
@@ -266,11 +265,11 @@ let g:ale_rust_rls_config = {
       \   }
       \ }
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               deoplate                               "
+"                               deoplete                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
-autocmd FileType * if index(['ruby', 'python'], &filetype) == -1 | let g:deoplete#enable_at_startup = 1 | endif
+let g:deoplete#enable_at_startup = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -366,50 +365,6 @@ augroup haskellStylish
   au FileType haskell nnoremap <leader>hs :call HaskellFormat('stylish')<CR>
   " First hindent, then stylish-haskell
   au FileType haskell nnoremap <leader>hf :call HaskellFormat('both')<CR>
-augroup END
-""""""""""""""
-"  neco-ghc  "
-""""""""""""""
-let g:necoghc_enable_detailed_browse = 1
-""""""""""""
-"  intero  "
-""""""""""""
-augroup interoMaps
-  au!
-  " Maps for intero. Restrict to Haskell buffers so the bindings don't collide.
-
-  " Background process and window management
-  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
-  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
-
-  " Open intero/GHCi split horizontally
-  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
-  " Open intero/GHCi split vertically
-  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
-  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
-
-  " Reloading (pick one)
-  " Automatically reload on save
-  au BufWritePost *.hs InteroReload
-  " Manually save and reload
-  au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
-
-  " Load individual modules
-  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
-  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
-
-  " Type-related information
-  " Heads up! These next two differ from the rest.
-  au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
-  au FileType haskell map <silent> <leader>T <Plug>InteroType
-  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
-
-  " Navigation
-  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
-
-  " Managing targets
-  " Prompts you to enter targets (no silent):
-  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
 augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              ECMAScript                              "
