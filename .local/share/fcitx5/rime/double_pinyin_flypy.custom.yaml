@@ -1,0 +1,45 @@
+patch:
+  # 标点及特殊表情，引入 symbols.custom.yaml 文件，设定触发条件
+  "punctuator/import_preset": symbols.custom
+  "recognizer/patterns/punct": "^/([a-z]+|[0-9])$"
+
+  # 输入双拼码的时候不转化为全拼码
+  # translator/preedit_format: {}
+
+  # 分号上屏二候选词；引号上屏三候选词
+  # "key_binder/bindings":
+    # - { when: has_menu, accept: semicolon, send: 2 }
+    # - { when: has_menu, accept: apostrophe, send: 3 }
+  # 更改‘西文’为‘英文’，‘增广’为‘扩展集’
+  switches:
+    - name: ascii_mode
+      reset: 0
+      states: ["中文", "英文"]
+    - name: full_shape
+      states: ["半角", "全角"]
+    - name: zh_simp
+      reset: 1
+      states: ["漢字","汉字"]
+    - name: ascii_punct
+      states: ["，。", "，．"]
+    - name: extended_charset
+      states: ["通用", "扩展集"]
+    - name: show_emoji # 该项为表情输入开关，具体内容可见下文中 [关于表情输入] 部分
+      reset: 1
+      states: [ "\uFE0E", "\uFE0F" ]
+
+  # simplifier:
+    # option_name: zh_simp
+
+  engine/filters:
+    - simplifier
+    - simplifier@emoji_conversion
+    - uniquifier
+
+  # 表情输入
+  emoji_conversion:
+    opencc_config: emoji.json
+    option_name: show_emoji
+    tags: abc
+
+  "translator/dictionary": extended

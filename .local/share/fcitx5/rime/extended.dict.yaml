@@ -1,0 +1,15 @@
+---
+name: extended
+version: "2020.03.05"
+sort: by_weight
+use_preset_vocabulary: true
+import_tables:
+  - luna_pinyin
+  - luna_pinyin.hanyu
+  - luna_pinyin.poetry
+  - luna_pinyin.extra_hanzi
+  - luna_pinyin.website
+  - luna_pinyin.computer
+  - luna_pinyin.biaoqing
+  - luna_pinyin.extended
+...
