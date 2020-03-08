@@ -37,7 +37,7 @@ then
   readonly packages=(
     moreutils exa bat fd ripgrep sd axel unarchiver
     neovim python-pynvim emacs
-    rustup ruby python
+    yarn python rustup ruby
     pkgfile openssh pass tmux
   )
   sudo pacman -S --noconfirm --needed $packages
@@ -50,6 +50,22 @@ then
   sudo pacman -S --noconfirm --needed $xorg_packages
   sudo pacman -D --noconfirm --asexplicit $xorg_packages
   fi
+fi
+
+if command -v yarn >/dev/null 2>&1 ; then
+  echo "Install NodeJS Package"
+  readonly node_packages=(
+    cz-cli cz-conventional-changelog standard-version
+  )
+  yarn global add $node_packages
+fi
+
+if command -v gem >/dev/null 2>&1 ; then
+  echo "Install Ruby Package"
+  readonly ruby_packages=(
+    pry nokogiri
+  )
+  gem install $ruby_packages
 fi
 
 if command -v nvim >/dev/null 2>&1; then
