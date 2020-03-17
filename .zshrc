@@ -155,6 +155,7 @@ alias c='LC_ALL="C"'
 
 alias g='git'
 alias gci='git add . && git commit -m'
+alias gcz='git add . && git cz'
 
 alias sl='sl -Feal'
 

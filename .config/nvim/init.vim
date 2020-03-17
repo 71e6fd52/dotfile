@@ -128,8 +128,9 @@ let g:indentLine_char = '┆'
 let &colorcolumn="80"
 au FileType rust let &colorcolumn=""
 au FileType python let &colorcolumn="100"
+au FileType gitcommit let &colorcolumn="72"
 let &textwidth=0
-au FileType vim let &textwidth=72
+au FileType vim,gitcommit let &textwidth=72
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               display                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
