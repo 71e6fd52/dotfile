@@ -264,8 +264,12 @@ new_gitlab_project()
 {
   name=$1
   [[ "$name" ]] || name=$(git rev-parse --show-toplevel | xargs basename)
-  echo "git push --set-upstream git@gitlab.com:71e6fd52/$name.git $(git rev-parse --abbrev-ref HEAD)"
-  git push --set-upstream git@gitlab.com:71e6fd52/$name.git $(git rev-parse --abbrev-ref HEAD)
+  (
+    set -x
+    git push --set-upstream git@gitlab.com:71e6fd52/$name.git $(git rev-parse --abbrev-ref HEAD)
+    git remote origin git@gitlab.com:71e6fd52/$name.git
+    git push --set-upstream origin
+  )
 }
 
 alias fitbit='while ! galileo --bluetooth PyDBUS --database RemoteRESTDatabase --no-https-only --debug | grep "Synchronisation successful" ; do : ; done'
