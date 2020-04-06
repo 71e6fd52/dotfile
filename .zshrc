@@ -83,8 +83,6 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 which rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
-which thefuck >/dev/null 2>&1 && eval $(thefuck --alias)
-which sccache >/dev/null 2>&1 && export RUSTC_WRAPPER=sccache
 
 if_darwin && share='/usr/local/share' || if_ArchLinux && share='/usr/share' || share="$HOME/opt"
 if_ArchLinux && plugins="$share/zsh/plugins" || plugins="$share"
@@ -106,9 +104,6 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*' rehash true
 
-bindkey '^[l' forward-word
-bindkey '^[h' backward-word
-
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
@@ -116,18 +111,8 @@ bindkey "^X^E" edit-command-line
 bindkey "\eq" push-line-or-edit
 
 # alias
-which very_safe_rm >/dev/null 2>&1 && alias rm='very_safe_rm' || alias rm='rm -vi'
-
-alias su='sudo $SHELL'
 alias sudo='sudo '
 alias sudp='sudo '
-
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 
 alias mkdir='mkdir -p -v'
 
@@ -147,8 +132,6 @@ alias .....="../../../.."
 alias .4='../../../..'
 alias .5='../../../../..'
 
-alias fuse='find -name ".fuse_hidden*"; find -name ".fuse_hidden*" | xargs rm -f'
-
 alias chinese='export LANG="zh_CN.UTF-8"'
 alias english='export LANG="en_US.UTF-8"'
 alias c='LC_ALL="C"'
@@ -157,13 +140,11 @@ alias g='git'
 alias gci='git add . && git commit -m'
 alias gcz='git add . && git cz'
 
-alias sl='sl -Feal'
-
 alias mv='mv -v'
 alias cp='cp -v --reflink=auto'
 
-alias vim=nvim
-alias vo,='vim '
+alias vim='nvim'
+alias vo,='vim'
 
 alias checknet='ping 114.114.114.114 -c 2'
 
@@ -265,13 +246,13 @@ new_gitlab_project()
 {
   name=$1
   [[ "$name" ]] || name=$(git rev-parse --show-toplevel | xargs basename)
-  echo "git push --set-upstream git@gitlab.com:71e6fd52/$name.git $(git rev-parse --abbrev-ref HEAD)"
-  git push --set-upstream git@gitlab.com:71e6fd52/$name.git $(git rev-parse --abbrev-ref HEAD)
+  (
+    set -x
+    git push --set-upstream git@gitlab.com:71e6fd52/$name.git $(git rev-parse --abbrev-ref HEAD)
+    git remote origin git@gitlab.com:71e6fd52/$name.git
+    git push --set-upstream origin
+  )
 }
-
-alias fitbit='while ! galileo --bluetooth PyDBUS --database RemoteRESTDatabase --no-https-only --debug | grep "Synchronisation successful" ; do : ; done'
-
-alias cqhttp='systemd-run --user --unit=cqhttp docker run --rm --name cqhttp -p 9000:9000 -p 5700:5700 -e CQHTTP_VERSION=2.1.3 -e CQHTTP_POST_MESSAGE_FORMAT=array -e CQHTTP_POST_URL=http://a.lan:9455 -v /home/datsd/_normal/coolq:/home/user/coolq richardchien/cqhttp'
 
 alias upgrade_times='echo "从" $(head /var/log/pacman.log -n1 | cut -c1-18) "起，滚了" $(rg -c "full system upgrade" /var/log/pacman.log) "次"'
 
