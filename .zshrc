@@ -247,9 +247,9 @@ new_gitlab_project()
   name=$1
   [[ "$name" ]] || name=$(git rev-parse --show-toplevel | xargs basename)
   (
-    set -x
+    set -xe
     git push --set-upstream git@gitlab.com:71e6fd52/$name.git $(git rev-parse --abbrev-ref HEAD)
-    git remote origin git@gitlab.com:71e6fd52/$name.git
+    git remote add origin git@gitlab.com:71e6fd52/$name.git
     git push --set-upstream origin
   )
 }
