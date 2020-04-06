@@ -35,8 +35,8 @@ if if_ArchLinux
 then
   echo "Install Package"
   readonly packages=(
-    moreutils exa bat fd ripgrep sd axel unarchiver
-    neovim python-pynvim emacs
+    moreutils exa bat fd ripgrep sd axel unarchiver jq httpie
+    neovim python-pynvim
     yarn python rustup ruby
     pkgfile openssh pass tmux
   )
