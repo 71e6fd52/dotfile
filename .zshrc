@@ -111,6 +111,8 @@ bindkey "^X^E" edit-command-line
 bindkey "\eq" push-line-or-edit
 
 # alias
+alias rm='rm -vi'
+
 alias sudo='sudo '
 alias sudp='sudo '
 
