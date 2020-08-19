@@ -8,8 +8,7 @@ export LANG='zh_CN.UTF-8'
 export C_FLAGS="-std=c99 -Wall"
 export CXX_FLAGS="-std=c++14 -Wall"
 
-export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
-export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
 if [ -n "$DISPLAY" ]; then
   export BROWSER='firefox-nightly.desktop'
