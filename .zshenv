@@ -3,8 +3,6 @@ export VISUAL='nvim'
 export PAGER='less'
 export PACMAN='powerpill'
 
-export LANG='zh_CN.UTF-8'
-
 export C_FLAGS="-std=c99 -Wall"
 export CXX_FLAGS="-std=c++14 -Wall"
 
