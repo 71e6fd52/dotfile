@@ -252,8 +252,9 @@ let g:ale_fixers = {
       \   'rust': ['rustfmt'],
       \   'python': ['autopep8'],
       \   'haskell': ['brittany', 'hlint'],
+      \   'cpp': ['clangtidy', 'clang-format'],
       \ }
-autocmd FileType ruby,haskell let g:ale_fix_on_save = 1
+autocmd FileType ruby,haskell,cpp let g:ale_fix_on_save = 1
 nmap <leader>gt <Plug>(ale_go_to_definition_in_tab)
 nmap <C-k> <Plug>(ale_previous_wrap)
 nmap <C-j> <Plug>(ale_next_wrap)
@@ -268,9 +269,12 @@ let g:ale_rust_rls_config = {
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               deoplete                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+" let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+" let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('sources', {
+      \   '_': ['ale'],
+      \ })
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
