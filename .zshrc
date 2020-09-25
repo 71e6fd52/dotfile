@@ -31,6 +31,11 @@ if_wsl()
   [[ "$(uname -r)" =~ 'Microsoft' ]]
 }
 
+if_wsl2()
+{
+  [[ "$(uname -r)" =~ 'microsoft-standard' ]]
+}
+
 if_ArchLinux()
 {
   [[ $(sed -rn 's|^ID=(.+)$|\1|p' /etc/os-release) =~ ^arch ]]
@@ -269,19 +274,3 @@ alias cnpm="npm --registry=https://registry.npm.taobao.org \
   # blur
 # fi
 
-if_wsl && [[ ! -d "/run/tmux" ]] && {
-  [[ -s /usr/local/bin/fix_tmux ]] && sudo /usr/local/bin/fix_tmux
-}
-if_wsl && [[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
-  [[ -n "$ATTACH_ONLY" ]] && {
-    tmux a 2>/dev/null || {
-      cd && exec tmux
-    }
-    exit
-  }
-
-  cd
-  tmux new-window -c "$PWD" 2>/dev/null && exec tmux a
-  exec tmux
-}
-true
