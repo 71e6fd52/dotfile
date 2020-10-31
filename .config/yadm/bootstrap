@@ -10,6 +10,11 @@ if_wsl()
   [[ "$(uname -r)" =~ 'Microsoft' ]]
 }
 
+if_Android()
+{
+  [[ "$(uname -o)" =~ Android ]]
+}
+
 if_ArchLinux()
 {
   [[ $(sed -rn 's|^ID=(.+)$|\1|p' /etc/os-release) =~ ^arch ]]
@@ -50,6 +55,19 @@ then
   sudo pacman -S --noconfirm --needed $xorg_packages
   sudo pacman -D --noconfirm --asexplicit $xorg_packages
   fi
+elif if_Android; then
+  echo "Install Package"
+  readonly packages=(
+    moreutils exa bat ripgrep axel jq
+    neovim
+    python rust ruby
+  )
+  pkg install $packages
+  pip install --user pynvim
+fi
+
+if ! if_ArchLinux && [[ ! -s ~/.grml-zshrc ]]; then
+  wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 fi
 
 if command -v yarn >/dev/null 2>&1 ; then
@@ -63,7 +81,7 @@ fi
 if command -v gem >/dev/null 2>&1 ; then
   echo "Install Ruby Package"
   readonly ruby_packages=(
-    pry nokogiri
+    pry neovim
   )
   gem install $ruby_packages
 fi
@@ -89,17 +107,21 @@ if command -v emacs >/dev/null 2>&1; then
 fi
 
 echo "get zsh plugin"
-if if_ArchLinux
-then
+if if_ArchLinux; then
   sudo pacman -S --noconfirm --needed zsh-syntax-highlighting zsh-autosuggestions zsh-completions
 else
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/opt/zsh-syntax-highlighting
-  git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/opt/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-completions.git ~/opt/zsh-completions
+  clone_or_update()
+  {
+    if [[ -d "$2" -a -n "$(ls "$2")" ]]; then
+      cd "$2" && git remote set-uri origin "$1" && git pull
+    else
+      git clone "$1" "$2"
+    fi
+  }
+  clone_or_update https://github.com/zsh-users/zsh-syntax-highlighting.git ~/opt/zsh-syntax-highlighting
+  clone_or_update https://github.com/zsh-users/zsh-autosuggestions.git ~/opt/zsh-autosuggestions
+  clone_or_update https://github.com/zsh-users/zsh-completions.git ~/opt/zsh-completions
 fi
-
-echo "clone password"
-git clone git@github.com:71e6fd52/password.git ~/.password-store
 
 if if_wsl
 then
