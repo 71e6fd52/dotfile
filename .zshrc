@@ -163,7 +163,11 @@ alias yay='yay --nodiffmenu --editmenu --cleanmenu --removemake --devel'
 alias be='bundle exec'
 alias ber='bundle exec rake'
 
-alias with_proxy='http_proxy=http://localhost:8099 https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy '
+if if_wsl2; then
+  alias with_proxy="http_proxy=http://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):8099 https_proxy=\$http_proxy HTTP_PROXY=\$http_proxy HTTPS_PROXY=\$http_proxy "
+else
+  alias with_proxy='http_proxy=http://localhost:8099 https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy '
+fi
 
 if if_wsl
 then
