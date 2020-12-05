@@ -9,7 +9,7 @@ export CXX_FLAGS="-std=c++14 -Wall"
 export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
 if [[ "$(uname -r)" =~ 'microsoft-standard' ]]; then
-  export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:340
+  export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
   export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
   export BROWSER='/mnt/c/Windows/explorer.exe'
   export LANG=zh_CN.UTF-8
