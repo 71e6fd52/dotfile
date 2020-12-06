@@ -15,7 +15,7 @@ Plug 'kovisoft/slimv', { 'for': ['lisp', 'scheme'] }
 "Plug 'mzlogin/vim-kramdown-tab', { 'for': 'markdown' } "Kramdown 列表缩进
 "Plug 'myusuf3/numbers.vim' "相对行号
 Plug 'airblade/vim-gitgutter' "git diff
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 Plug 'Yggdroot/indentLine' "indent display
 Plug 'elzr/vim-json'
 "Plug 'fholgado/minibufexpl.vim' "display buffer
