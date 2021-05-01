@@ -58,6 +58,23 @@ fi
 
 if if_wsl2; then
   export GPG_TTY=$(tty)
+  export HOST_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+
+  HOST=WINDOWS-HOST
+  IP_HOST=$(grep -m 1 $HOST /etc/hosts)
+  if [[ -z $IP_HOST ]]; then
+    echo "Creating IP Address-hostname mapping"
+    echo "host has the IP Address $HOST_IP"
+    sudo zsh -c "echo '$HOST_IP\t$HOST.localdomain\t$HOST' >> /etc/hosts"
+  else
+    OLD_IP=$(echo "$IP_HOST" | awk '{print $1}')
+
+    if [[ "$HOST_IP" != "$OLD_IP" ]]; then
+      echo "Updating IP Address-hostname mapping"
+      echo "host has the IP Address $HOST_IP"
+      sudo sed -i "s|$IP_HOST|$HOST_IP\t$HOST.localdomain\t$HOST|" /etc/hosts
+    fi
+  fi
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
