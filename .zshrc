@@ -36,6 +36,11 @@ if_wsl2()
   [[ "$(uname -r)" =~ 'microsoft-standard' ]]
 }
 
+if_vbox()
+{
+  dmesg | rg vboxguest >/dev/null 2>&1
+}
+
 if_ArchLinux()
 {
   [[ $(sed -rn 's|^ID=(.+)$|\1|p' /etc/os-release) =~ ^arch ]]
@@ -44,6 +49,11 @@ if_ArchLinux()
 if_openSUSE()
 {
   [[ $(sed -rn 's|^ID="(.+)"$|\1|p' /etc/os-release) =~ ^opensuse ]]
+}
+
+if_NixOS()
+{
+  [[ $(sed -rn 's|^ID=(.+)$|\1|p' /etc/os-release) =~ ^nixos ]]
 }
 
 load_if_exist()
@@ -93,7 +103,7 @@ if_openSUSE && command_not_found_handler () {
   exit 1
 }
 
-if [[ $(if_ArchLinux; echo $?) -ne 0 ]]
+if ! if_ArchLinux && ! if_NixOS
 then
   load_if_exist ~/.grml-zshrc || echo "wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc"
 fi
@@ -186,6 +196,8 @@ alias ber='bundle exec rake'
 
 if if_wsl2; then
   alias with_proxy="http_proxy=http://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):8099 https_proxy=\$http_proxy HTTP_PROXY=\$http_proxy HTTPS_PROXY=\$http_proxy "
+elif if_vbox; then
+  alias with_proxy='http_proxy=http://192.168.1.200:8099 https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy '
 else
   alias with_proxy='http_proxy=http://localhost:8099 https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy '
 fi
