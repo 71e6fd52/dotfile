@@ -38,7 +38,7 @@ if_wsl2()
 
 if_vbox()
 {
-  dmesg | rg vboxguest >/dev/null 2>&1
+  dmesg 2>&1 | rg vboxguest >/dev/null 2>&1
 }
 
 if_ArchLinux()
@@ -223,7 +223,9 @@ if_ArchLinux && upgrade()
 
   local kernel=$(uname -r | cut -d- -f4 | sed -e 's|^|linux-|' -e 's|-arch$||')
 
-  sudo powerpill -Suw --noconfirm
+  if command -v powerpill >/dev/null 2>&1; then
+    sudo powerpill -Suw --noconfirm
+  fi
   sudo pacman -Su --noconfirm --ignore $kernel --ignore $kernel-headers 2>&1 | tee -a $log_file
   PACMAN=pacman yay -Sua --noconfirm --answerclean A --removemake --noeditmenu --nodiffmenu --devel 2>&1 | tee -a $log_file
   pacman -Qtdq | ifne sudo pacman -Rcs - --noconfirm 2>&1 | tee -a $log_file
