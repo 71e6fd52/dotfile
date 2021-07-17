@@ -1,7 +1,5 @@
 call plug#begin()
 Plug 'Valloric/ListToggle'
-"Plug 'neomake/neomake'
-"Plug 'dojoteef/neomake-autolint'
 Plug 'w0rp/ale'
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' } "Markdown 显示
 Plug 'Lokaltog/vim-easymotion' "快速移动
@@ -11,43 +9,32 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'kshenoy/vim-signature'
-Plug 'kovisoft/slimv', { 'for': ['lisp', 'scheme'] }
-"Plug 'mzlogin/vim-kramdown-tab', { 'for': 'markdown' } "Kramdown 列表缩进
-"Plug 'myusuf3/numbers.vim' "相对行号
 Plug 'airblade/vim-gitgutter' "git diff
-" Plug 'jreybert/vimagit'
 Plug 'Yggdroot/indentLine' "indent display
 Plug 'elzr/vim-json'
-"Plug 'fholgado/minibufexpl.vim' "display buffer
-"Plug 'lilydjwg/fcitx.vim'
 Plug 'gcmt/wildfire.vim' "快速选择
 Plug 'sjl/gundo.vim' "tree undo
 Plug 'vim-scripts/DrawIt'
 Plug 'junegunn/vim-easy-align'
-"Plug 'lyuts/vim-rtags'
 Plug 'vim-scripts/VisIncr'
 Plug 'mileszs/ack.vim' "act ag
-"Plug 'arakashic/chromatica.nvim'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tmhedberg/matchit'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'skwp/vim-rspec'
-" Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'nathangrigg/vim-beancount'
 """"""""""""""
 "  autopair  "
 """"""""""""""
-" Plug 'jiangmiao/auto-pairs'
 Plug 'rstacruz/vim-closer'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 """"""""""""""
 "  filetype  "
 """"""""""""""
-Plug 'LokiChaos/vim-tintin'
 Plug 'cespare/vim-toml'
 Plug 'kchmck/vim-coffee-script'
 Plug 'rhysd/vim-crystal'
@@ -65,15 +52,7 @@ Plug 'DATechnologyStudio/vim-snippets'
 """""""""""
 "  color  "
 """""""""""
-"Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
-"""""""""""""
-"  haskell  "
-"""""""""""""
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-" Plug 'alx741/vim-hindent', { 'for': 'haskell' }
-" Plug 'alx741/vim-stylishask', { 'for': 'haskell' }
-" Plug 'meck/vim-brittany', { 'for': 'haskell' }
 """"""""""""""""
 "  ECMAScript  "
 """"""""""""""""
@@ -89,7 +68,6 @@ Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/context_filetype.vim'
 " sources
-"Plug 'Shougo/deoplete-rct'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/vimshell.vim'
 Plug 'fishbullet/deoplete-ruby'
@@ -251,7 +229,6 @@ let g:ale_fixers = {
       \   'ruby': ['rubocop'],
       \   'rust': ['rustfmt'],
       \   'python': ['autopep8'],
-      \   'haskell': ['brittany', 'hlint'],
       \   'cpp': ['clangtidy', 'clang-format'],
       \ }
 autocmd FileType ruby,haskell,cpp let g:ale_fix_on_save = 1
@@ -281,12 +258,6 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
   return deoplete#close_popup() . "\<CR>"
 endfunction
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              chromatica                              "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:chromatica#enable_at_startup = 1
-let g:chromatica#responsive_mode=1
-"let g:chromatica#highlight_feature_level = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              ultisnips                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -325,13 +296,6 @@ nmap <F7> :GundoToggle<CR>
 set undofile
 set undodir=~/.cache/nvim/gundo/
 let g:gundo_prefer_python3 = 1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                slimv                                 "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au FileType lisp let g:slimv_swank_cmd = '! systemctl --user start slimv-lisp'
-au FileType scheme let g:slimv_swank_cmd = '! systemctl --user start slimv-scheme'
-let g:lisp_rainbow=1
-let g:paredit_electric_return=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               wildfire                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
