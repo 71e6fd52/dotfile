@@ -1,4 +1,5 @@
 .ssh/aur
 .ssh/id_rsa
 .ssh/id_ecdsa
+.ssh/id_ed25519
 .ssh/config
