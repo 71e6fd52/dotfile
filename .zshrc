@@ -197,9 +197,9 @@ alias ber='bundle exec rake'
 if if_wsl2; then
   alias with_proxy="http_proxy=http://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):8099 https_proxy=\$http_proxy HTTP_PROXY=\$http_proxy HTTPS_PROXY=\$http_proxy "
 elif if_vbox; then
-  alias with_proxy='http_proxy=http://192.168.1.200:8099 https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy '
+  alias with_proxy='http_proxy=http://192.168.1.200:8099 https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy ALL_PROXY=$http_proxy '
 else
-  alias with_proxy='http_proxy=http://localhost:8099 https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy '
+  alias with_proxy='http_proxy=http://localhost:8099 https_proxy=$http_proxy HTTP_PROXY=$http_proxy HTTPS_PROXY=$http_proxy ALL_PROXY=$http_proxy '
 fi
 
 if if_wsl
@@ -223,9 +223,6 @@ if_ArchLinux && upgrade()
 
   local kernel=$(uname -r | cut -d- -f4 | sed -e 's|^|linux-|' -e 's|-arch$||')
 
-  if command -v powerpill >/dev/null 2>&1; then
-    sudo powerpill -Suw --noconfirm
-  fi
   sudo pacman -Su --noconfirm --ignore $kernel --ignore $kernel-headers 2>&1 | tee -a $log_file
   PACMAN=pacman yay -Sua --noconfirm --answerclean A --removemake --noeditmenu --nodiffmenu --devel 2>&1 | tee -a $log_file
   pacman -Qtdq | ifne sudo pacman -Rcs - --noconfirm 2>&1 | tee -a $log_file

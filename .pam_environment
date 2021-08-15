@@ -5,5 +5,3 @@ BROWSER          DEFAULT=elinks
 EDITOR           DEFAULT=nvim
 VISUAL           DEFAULT=nvim
 PAGER            DEFAULT=less
-
-PACMAN           DEFAULT=powerpill
