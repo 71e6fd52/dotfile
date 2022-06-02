@@ -119,6 +119,7 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 which rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
+which direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 if_darwin && share='/usr/local/share' || if_ArchLinux && share='/usr/share' || share="$HOME/opt"
 if_ArchLinux && plugins="$share/zsh/plugins" || plugins="$share"
