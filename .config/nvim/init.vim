@@ -39,6 +39,7 @@ Plug 'cespare/vim-toml'
 Plug 'kchmck/vim-coffee-script'
 Plug 'rhysd/vim-crystal'
 Plug 'ron-rs/ron.vim'
+Plug 'neoclide/jsonc.vim'
 """""""""""""
 "  airline  "
 """""""""""""
