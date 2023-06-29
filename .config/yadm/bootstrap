@@ -110,7 +110,7 @@ if command -v rustup >/dev/null 2>&1; then
   echo "Install rust"
   rustup default nightly
   rustup update
-  rustup component add clippy rls rust-analysis
+  rustup component add clippy rust-analysis
 
   mkdir -p ~/.zfunc
   rustup completions zsh cargo > ~/.zfunc/_cargo
