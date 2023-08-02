@@ -155,6 +155,8 @@ alias sudp='sudo '
 
 alias mkdir='mkdir -p -v'
 
+alias bat='bat -P'
+
 alias ls='exa'
 alias la='ls -a'
 alias ll='la -lg --time-style long-iso'
