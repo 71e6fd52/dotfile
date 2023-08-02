@@ -6,59 +6,52 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 
-if_color()
-{
+if_color() {
   [[ "$TERM" =~ ".*-256color$" || "$TERM" =~ "kitty" ]]
 }
 
-if_256()
-{
+if_256() {
   [[ "$TERM" =~ ".*-256color$" ]]
 }
 
-if_kitty()
-{
+if_kitty() {
   [[ "$TERM" =~ "kitty" ]]
 }
 
-if_darwin()
-{
+if_darwin() {
   [[ "$(uname)" =~ 'Darwin' ]]
 }
 
-if_wsl()
-{
+if_wsl() {
   [[ "$(uname -r)" =~ 'Microsoft' ]]
 }
 
-if_wsl2()
-{
+if_wsl2() {
   [[ "$(uname -r)" =~ 'microsoft-standard' ]]
 }
 
-if_vbox()
-{
+if_vbox() {
   dmesg 2>&1 | rg vboxguest >/dev/null 2>&1
 }
 
-if_ArchLinux()
-{
+if_ArchLinux() {
   [[ $(sed -rn 's|^ID=(.+)$|\1|p' /etc/os-release) =~ ^arch ]]
 }
 
-if_openSUSE()
-{
+if_openSUSE() {
   [[ $(sed -rn 's|^ID="(.+)"$|\1|p' /etc/os-release) =~ ^opensuse ]]
 }
 
-if_NixOS()
-{
+if_NixOS() {
   [[ $(sed -rn 's|^ID=(.+)$|\1|p' /etc/os-release) =~ ^nixos ]]
 }
 
-load_if_exist()
-{
+load_if_exist() {
   [[ "$1" ]] && [[ -s "$1" ]] && source "$1"
+}
+
+if_command() {
+  command -v "$1" >/dev/null
 }
 
 if if_wsl; then
@@ -94,6 +87,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+load_if_exist "$HOME/opt/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 if_openSUSE && command_not_found_handler () {
   if [ -x /usr/bin/python3 ] && [ -x /usr/bin/command-not-found ]
@@ -109,17 +103,17 @@ then
 fi
 
 if_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
-which yarn >/dev/null 2>&1 && export PATH="$(yarn global bin):$PATH"
-which cargo >/dev/null 2>&1 && export PATH="$HOME/.cargo/bin:$PATH"
-which ruby >/dev/null 2>&1 && export PATH="$(ruby -e "puts Gem.user_dir")/bin:$PATH"
-which go >/dev/null 2>&1 && export PATH="$(go env GOPATH)/bin:$PATH"
-which ccache >/dev/null 2>&1 && export PATH="$(dirname $(which ccache))/../lib/ccache/bin/:$PATH"
+if_command yarn && export PATH="$(yarn global bin):$PATH"
+if_command cargo && export PATH="$HOME/.cargo/bin:$PATH"
+if_command ruby && export PATH="$(ruby -e "puts Gem.user_dir")/bin:$PATH"
+if_command go && export PATH="$(go env GOPATH)/bin:$PATH"
+if_command ccache && export PATH="$(dirname $(which ccache))/../lib/ccache/bin/:$PATH"
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 [[ -d "$HOME/.rbenv" ]] && export PATH="$HOME/.rbenv/bin:$PATH"
 typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
-which rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
-which direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
+if_command rbenv && eval "$(rbenv init -)"
+if_command direnv && eval "$(direnv hook zsh)"
 
 if_darwin && share='/usr/local/share' || if_ArchLinux && share='/usr/share' || share="$HOME/opt"
 if_ArchLinux && plugins="$share/zsh/plugins" || plugins="$share"
@@ -136,10 +130,10 @@ if_256 && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 if_kitty && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
 
-zstyle :compinstall filename "$HOME/.zshrc"
-autoload -Uz compinit
-compinit
-zstyle ':completion:*' rehash true
+# zstyle :compinstall filename "$HOME/.zshrc"
+# autoload -Uz compinit
+# compinit
+# zstyle ':completion:*' rehash true
 
 autoload -z edit-command-line
 zle -N edit-command-line
