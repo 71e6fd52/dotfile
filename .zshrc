@@ -1,10 +1,13 @@
 HISTFILE=~/.histfile
 HISTSIZE=65536
 SAVEHIST=4294967296
+setopt HIST_FCNTL_LOCK # Use modern file-locking mechanisms, for better safety & performance.
 setopt INC_APPEND_HISTORY
-setopt SHARE_HISTORY
-setopt HIST_IGNORE_ALL_DUPS
+setopt SHARE_HISTORY # Auto-sync history between concurrent sessions.
+setopt HIST_IGNORE_ALL_DUPS # Keep only the most recent copy of each duplicate entry in history.
 setopt HIST_REDUCE_BLANKS
+
+setopt EXTENDED_GLOB
 
 if_color() {
   [[ "$TERM" =~ ".*-256color$" || "$TERM" =~ "kitty" ]]
@@ -89,6 +92,10 @@ fi
 
 load_if_exist "$HOME/opt/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
+bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+
 if_openSUSE && command_not_found_handler () {
   if [ -x /usr/bin/python3 ] && [ -x /usr/bin/command-not-found ]
   then
@@ -129,6 +136,11 @@ load_if_exist $plugins/zsh-completions/zsh-completions.plugin.zsh
 if_256 && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 if_kitty && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=243'
 load_if_exist "$HOME/opt/zsh-sudo/sudo.plugin.zsh"
+
+export LESS="-R -F"
+load_if_exist "$HOME/opt/zcolors/zcolors.plugin.zsh"
+[[ -s "$HOME/.zcolors" ]] || zcolors >| "$HOME/.zcolors"
+load_if_exist "$HOME/.zcolors"
 
 # zstyle :compinstall filename "$HOME/.zshrc"
 # autoload -Uz compinit

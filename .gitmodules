@@ -10,3 +10,6 @@
 [submodule "opt/zsh-autocomplete"]
 	path = opt/zsh-autocomplete
 	url = https://github.com/marlonrichert/zsh-autocomplete.git
+[submodule "opt/zcolors"]
+	path = opt/zcolors
+	url = https://github.com/marlonrichert/zcolors.git

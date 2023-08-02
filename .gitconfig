@@ -25,3 +25,61 @@
 	ff = only
 [init]
 	defaultBranch = master
+[color "status"]
+	branch = 6 normal bold
+	added = 10 normal
+	updated = 10 normal
+	localbranch = 6 normal bold
+	changed = 11 normal
+	header = normal
+	remotebranch = 5 normal bold
+	nobranch = 1 0 bold
+	unmerged = 9 normal
+	untracked = normal
+[color "branch"]
+	plain = 6 normal bold
+	remote = 5 normal bold
+	current = 6 normal bold reverse
+	local = 6 normal bold
+	upstream = 5 normal bold
+[color "remote"]
+	hint = normal dim
+	success = 2 normal
+	error = 1 normal
+	warning = 3 normal
+[color "interactive"]
+	header = normal bold
+	prompt = 15 4
+	help = normal
+	error = 1 0 bold
+[color "diff"]
+	commit = 3 0
+	newMoved = 11 normal
+	oldMovedAlternativeDimmed = 4 normal dim
+	frag = normal dim
+	oldMovedAlternative = 4 normal
+	contextBold = normal bold
+	newBold = 10 normal bold
+	context = normal
+	oldMoved = 3 normal
+	oldBold = 1 normal bold
+	newMovedDimmed = 11 normal dim
+	func = 2 normal bold dim
+	meta = normal italic
+	newDimmed = 10 normal dim
+	newMovedAlternative = 12 normal
+	new = 10 normal
+	newMovedAlternativeDimmed = 12 normal dim
+	whitespace = normal 9
+	oldMovedDimmed = 3 normal dim
+	oldDimmed = 1 normal dim
+	old = 1 normal
+[color "decorate"]
+	branch = 6 normal bold
+	tag = 3 0
+	remotebranch = 5 normal bold
+	stash = normal
+	grafted = 1 0 bold
+	HEAD = 6 normal bold italic
+[diff]
+	colorMoved = zebra
