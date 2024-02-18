@@ -2,8 +2,8 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
 
-export C_FLAGS="-std=c99 -Wall"
-export CXX_FLAGS="-std=c++14 -Wall"
+export C_FLAGS="-std=c11 -Wall"
+export CXX_FLAGS="-std=c++21 -Wall"
 
 export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
