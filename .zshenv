@@ -20,3 +20,12 @@ else
     export BROWSER='elinks'
   fi
 fi
+
+# cross compile
+export CC_x86_64_pc_windows_msvc="clang-cl"
+export CXX_x86_64_pc_windows_msvc="clang-cl"
+export AR_x86_64_pc_windows_msvc="llvm-lib"
+export CL_FLAGS="-Wno-unused-command-line-argument -fuse-ld=lld-link -I /windows/windows_kits/10/Include/10.0.22621.0/ucrt -I /windows/windows_kits/10/Include/10.0.22621.0/um -I /windows/msvc/include -I /windows/windows_kits/10/include/10.0.22621.0/shared/"
+export RUSTFLAGS="-Lnative=/windows/windows_kits/10/Lib/10.0.22621.0/ucrt/x64 -Lnative=/windows/windows_kits/10/Lib/10.0.22621.0/um/x64 -Lnative=/windows/msvc/lib/x64"
+export CFLAGS_x86_64_pc_windows_msvc="$CL_FLAGS"
+export CXXFLAGS_x86_64_pc_windows_msvc="$CL_FLAGS"
