@@ -6,6 +6,7 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY # Auto-sync history between concurrent sessions.
 setopt HIST_IGNORE_ALL_DUPS # Keep only the most recent copy of each duplicate entry in history.
 setopt HIST_REDUCE_BLANKS
+setopt hist_ignore_space
 
 setopt EXTENDED_GLOB
 
@@ -90,12 +91,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-load_if_exist "$HOME/opt/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
-
-bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
-bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
-zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
-
 if_openSUSE && command_not_found_handler () {
   if [ -x /usr/bin/python3 ] && [ -x /usr/bin/command-not-found ]
   then
@@ -108,6 +103,13 @@ if ! if_ArchLinux && ! if_NixOS
 then
   load_if_exist ~/.grml-zshrc || echo "wget -O ~/.grml-zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc"
 fi
+
+# load_if_exist "$HOME/opt/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+
+# bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+# bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+# zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+
 
 if_darwin && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:$PATH"
 if_command yarn && export PATH="$(yarn global bin):$PATH"
@@ -141,6 +143,15 @@ export LESS="-R -F"
 load_if_exist "$HOME/opt/zcolors/zcolors.plugin.zsh"
 [[ -s "$HOME/.zcolors" ]] || zcolors >| "$HOME/.zcolors"
 load_if_exist "$HOME/.zcolors"
+
+REPORTTIME=5
+
+() { # TIMEFMT {{{3
+  local white_b=$'\e[1;97m' blue=$'\e[94m' green=$'\e[0;38;5;154m' rst=$'\e[0m'
+  TIMEFMT=("$green== TIME REPORT FOR $white_b%J$green ==$rst"$'\n'
+    "  User: $blue%U$rst"$'\t'"System: $blue%S$rst  Total: $blue%*Es${rst}"$'\n'
+    "  CPU:  $blue%P$rst"$'\t'"Mem:    $blue%M MiB$rst")
+}
 
 # zstyle :compinstall filename "$HOME/.zshrc"
 # autoload -Uz compinit
@@ -198,7 +209,7 @@ alias checknet='ping 114.114.114.114 -c 2'
 alias https='http --default-scheme=https'
 alias :q='exit'
 
-alias yay='yay --nodiffmenu --editmenu --cleanmenu --removemake --devel'
+alias yay='yay --diffmenu=false --editmenu --cleanmenu --removemake --devel'
 
 alias be='bundle exec'
 alias ber='bundle exec rake'
@@ -230,10 +241,8 @@ if_ArchLinux && upgrade()
   mv $old_log_file $log_file
   ln -srf $log_file ~/.log/upgrade.log
 
-  local kernel=$(uname -r | cut -d- -f4 | sed -e 's|^|linux-|' -e 's|-arch$||')
-
-  sudo pacman -Su --noconfirm --ignore $kernel --ignore $kernel-headers 2>&1 | tee -a $log_file
-  PACMAN=pacman yay -Sua --noconfirm --answerclean N --removemake --noeditmenu --nodiffmenu --devel 2>&1 | tee -a $log_file
+  sudo pacman -Su --noconfirm 2>&1 | tee -a $log_file
+  PACMAN=pacman yay -Sua --noconfirm --answerclean N --removemake --editmenu=false --diffmenu=false --devel 2>&1 | tee -a $log_file
   pacman -Qtdq | ifne sudo pacman -Rcs - --noconfirm 2>&1 | tee -a $log_file
   rg '警告' $log_file
   rg '错误' $log_file
